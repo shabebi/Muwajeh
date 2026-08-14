@@ -1,0 +1,940 @@
+/* =========================================================
+   موّجه — TEST PAGE
+   Arabic / RTL
+   Based on the supplied Figma specifications
+   ========================================================= */
+
+:root {
+    --color-primary: #0A1D38;
+    --color-secondary: #C29447;
+    --color-tertiary: #1E304C;
+
+    --color-page: #F7F9FB;
+    --color-white: #FFFFFF;
+
+    --color-heading: #0F172A;
+    --color-text: #44474D;
+    --color-muted: #68717C;
+
+    --color-border: #E2E8F0;
+
+    --font-headline: "Tajawal", sans-serif;
+    --font-body: "Cairo", sans-serif;
+
+    --container-width: 1280px;
+
+    --transition: 180ms ease;
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    direction: rtl;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-width: 320px;
+
+    background: var(--color-page);
+    color: var(--color-text);
+
+    font-family: var(--font-body);
+    line-height: 1.6;
+
+    direction: rtl;
+    text-align: right;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.top-navigation {
+    box-sizing: border-box;
+
+    position: absolute;
+
+    top: 24px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: calc(100% - 48px);
+    max-width: 1280px;
+
+    height: 64px;
+
+    padding: 0 24px;
+
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 24px;
+
+    background: rgba(247, 249, 251, 0.8);
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    box-shadow: 0 10px 30px rgba(10, 29, 56, 0.04);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border-radius: 9999px;
+
+    z-index: 10;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.logo img {
+    width: auto;
+    height: 48px;
+    object-fit: contain;
+}
+
+.navigation-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 38px;
+
+    height: 100%;
+
+    margin-inline: auto;
+}
+
+.nav-link {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    height: 100%;
+
+    color: #4B4F55;
+
+    font-family: var(--font-body);
+    font-size: 18px;
+    font-weight: 500;
+
+    white-space: nowrap;
+
+    transition: color var(--transition);
+}
+
+.nav-link:hover {
+    color: var(--color-primary);
+}
+
+.nav-link.active {
+    color: var(--color-secondary);
+    font-weight: 700;
+}
+
+.nav-link.active::after {
+    content: "";
+
+    position: absolute;
+
+    bottom: 7px;
+    right: 50%;
+
+    transform: translateX(50%);
+
+    width: 5px;
+    height: 5px;
+
+    background: var(--color-secondary);
+    border-radius: 50%;
+}
+
+.login-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    height: 48px;
+
+    padding: 0 30px;
+
+    background: var(--color-secondary);
+    color: #FFFFFF;
+
+    border-radius: 9999px;
+
+    font-family: var(--font-body);
+    font-size: 18px;
+    font-weight: 500;
+
+    white-space: nowrap;
+
+    transition:
+        background-color var(--transition),
+        transform var(--transition);
+}
+
+.login-button:hover {
+    background: #B1843D;
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+   Figma:
+   width 1280px / max-width 1280px
+   padding 128px 24px 48px
+   ========================================================= */
+
+.main-content {
+    width: 100%;
+    max-width: var(--container-width);
+
+    min-height: 1177px;
+
+    margin: 0 auto;
+
+    padding: 128px 24px 48px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 24px;
+}
+
+
+/* =========================================================
+   MAIN WHITE TEST CONTAINER
+   Figma:
+   width 1232px
+   padding 48px
+   gap 48px
+   border-radius 24px
+   ========================================================= */
+
+.test-container {
+    box-sizing: border-box;
+
+    width: 100%;
+    min-height: 1001px;
+
+    padding: 48px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 48px;
+
+    background: var(--color-white);
+
+    border: 1px solid var(--color-border);
+
+    box-shadow:
+        0 10px 30px rgba(10, 29, 56, 0.04);
+
+    border-radius: 24px;
+
+    position: relative;
+    isolation: isolate;
+}
+
+
+/* =========================================================
+   INTRO
+   Figma:
+   width 768px
+   gap 16px
+   ========================================================= */
+
+.intro-container {
+    width: 100%;
+    max-width: 768px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 16px;
+
+    text-align: center;
+}
+
+
+/* Badge */
+
+.test-badge {
+    width: 192px;
+    height: 28px;
+
+    padding: 6px 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--color-tertiary);
+
+    border-radius: 9999px;
+}
+
+.test-badge span {
+    color: #FFFFFF;
+
+    font-family: var(--font-body);
+
+    font-size: 12px;
+    font-weight: 500;
+
+    line-height: 16px;
+
+    white-space: nowrap;
+}
+
+
+/* Main title */
+
+.test-title {
+    width: 100%;
+    max-width: 757px;
+
+    margin: 0;
+
+    color: var(--color-heading);
+
+    font-family: var(--font-headline);
+
+    font-size: 48px;
+    font-weight: 700;
+
+    line-height: 60px;
+
+    text-align: center;
+}
+
+
+/* Description */
+
+.test-description {
+    width: 100%;
+    max-width: 720px;
+
+    margin: 0;
+
+    color: var(--color-text);
+
+    font-family: var(--font-body);
+
+    font-size: 18px;
+    font-weight: 400;
+
+    line-height: 28px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   METRICS GRID
+   Figma:
+   width 1134px
+   height 148px
+   gap 24px
+   ========================================================= */
+
+.metrics-grid {
+    width: 100%;
+    max-width: 1134px;
+
+    min-height: 148px;
+
+    display: flex;
+    flex-direction: row;
+
+    justify-content: center;
+    align-items: stretch;
+
+    gap: 24px;
+}
+
+
+/* Metric card */
+
+.metric-card {
+    box-sizing: border-box;
+
+    flex: 1 1 0;
+
+    min-width: 0;
+    height: 148px;
+
+    padding: 24px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: flex-start;
+
+    background: #F7F9FB;
+
+    border: 1px solid var(--color-border);
+
+    border-radius: 24px;
+
+    text-align: center;
+}
+
+
+/* Metric icon */
+
+.metric-icon {
+    width: 30px;
+    height: 30px;
+
+    margin-bottom: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--color-secondary);
+
+    color: #FFFFFF;
+
+    border-radius: 50%;
+
+    font-size: 13px;
+}
+
+
+/* Metric label */
+
+.metric-label {
+    color: var(--color-text);
+
+    font-family: var(--font-body);
+
+    font-size: 14px;
+    font-weight: 600;
+
+    line-height: 20px;
+
+    text-align: center;
+}
+
+
+/* Metric value */
+
+.metric-value {
+    margin-top: 2px;
+
+    color: var(--color-heading);
+
+    font-family: var(--font-headline);
+
+    font-size: 24px;
+    font-weight: 700;
+
+    line-height: 32px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   INFORMATION SECTION
+   Figma:
+   width 1134px
+   height 278px
+   gap 48px
+   ========================================================= */
+
+.information-section {
+    width: 100%;
+    max-width: 1134px;
+
+    min-height: 278px;
+
+    display: flex;
+    flex-direction: row;
+
+    justify-content: center;
+    align-items: stretch;
+
+    gap: 48px;
+}
+
+
+/* =========================================================
+   INSTRUCTIONS
+   ========================================================= */
+
+.instructions-container {
+    flex: 1 1 0;
+
+    min-width: 0;
+    min-height: 278px;
+
+    padding-bottom: 6px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 24px;
+}
+
+.section-title {
+    width: 100%;
+
+    margin: 0;
+
+    color: var(--color-heading);
+
+    font-family: var(--font-headline);
+
+    font-size: 24px;
+    font-weight: 700;
+
+    line-height: 32px;
+
+    text-align: right;
+}
+
+
+/* Instruction list */
+
+.instruction-list {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 24px;
+}
+
+
+/* Instruction item */
+
+.instruction-item {
+    width: 100%;
+
+    min-height: 48px;
+
+    display: flex;
+    flex-direction: row;
+
+    align-items: flex-start;
+
+    gap: 16px;
+
+    direction: rtl;
+}
+
+
+/* Text content */
+
+.instruction-content {
+    flex: 1;
+
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.instruction-content h3 {
+    margin: 0;
+
+    color: var(--color-heading);
+
+    font-family: var(--font-body);
+
+    font-size: 14px;
+    font-weight: 600;
+
+    line-height: 20px;
+
+    text-align: right;
+}
+
+.instruction-content p {
+    margin: 0;
+
+    color: var(--color-text);
+
+    font-family: var(--font-body);
+
+    font-size: 16px;
+    font-weight: 400;
+
+    line-height: 24px;
+
+    text-align: right;
+}
+
+
+/* Instruction icon */
+
+.instruction-icon {
+    width: 40px;
+    height: 40px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(10, 29, 56, 0.1);
+
+    color: var(--color-secondary);
+
+    border: 1px solid var(--color-secondary);
+
+    border-radius: 9999px;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   HOLLAND CARD
+   Figma:
+   width 543px
+   height 278px
+   padding 32px
+   background #F8FAFC
+   ========================================================= */
+
+.holland-card {
+    flex: 1 1 0;
+
+    min-width: 0;
+    min-height: 278px;
+
+    padding: 32px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 16px;
+
+    background: #F8FAFC;
+
+    border: 1px solid var(--color-border);
+
+    border-radius: 24px;
+}
+
+.holland-description {
+    width: 100%;
+
+    margin: 0;
+
+    color: var(--color-text);
+
+    font-family: var(--font-body);
+
+    font-size: 16px;
+    font-weight: 400;
+
+    line-height: 24px;
+
+    text-align: right;
+}
+
+
+/* RIASEC tags */
+
+.riasec-tags {
+    width: 100%;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    align-items: center;
+    justify-content: flex-start;
+
+    gap: 10px;
+
+    margin-top: auto;
+
+    direction: rtl;
+}
+
+.riasec-tags span {
+    padding: 4px 12px;
+
+    background: #FFFFFF;
+
+    border: 1px solid var(--color-border);
+
+    border-radius: 9999px;
+
+    color: var(--color-text);
+
+    font-family: var(--font-body);
+
+    font-size: 14px;
+    font-weight: 500;
+
+    line-height: 20px;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   CTA
+   Figma:
+   width 1134px
+   height 97px
+   border-top
+   padding-top 32px
+   ========================================================= */
+
+.test-cta {
+    box-sizing: border-box;
+
+    width: 100%;
+    max-width: 1134px;
+
+    height: 97px;
+
+    padding-top: 32px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 16px;
+
+    border-top: 1px solid var(--color-border);
+}
+
+
+/* Start button */
+
+.start-test-button {
+    width: 254px;
+    height: 64px;
+
+    padding: 16px 32px;
+
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    background: var(--color-secondary);
+
+    color: var(--color-heading);
+
+    border-radius: 9999px;
+
+    font-family: var(--font-headline);
+
+    font-size: 24px;
+    font-weight: 700;
+
+    line-height: 32px;
+
+    text-align: center;
+
+    transition:
+        transform var(--transition),
+        filter var(--transition);
+}
+
+.start-test-button:hover {
+    transform: translateY(-2px);
+    filter: brightness(0.96);
+}
+
+.start-test-button i {
+    font-size: 16px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1050px) {
+
+    .navigation-links {
+        gap: 22px;
+    }
+
+    .nav-link {
+        font-size: 16px;
+    }
+
+    .login-button {
+        padding: 0 22px;
+        font-size: 16px;
+    }
+
+    .test-container {
+        padding: 40px 32px;
+    }
+
+    .metrics-grid,
+    .information-section,
+    .test-cta {
+        max-width: 100%;
+    }
+}
+
+
+@media (max-width: 850px) {
+
+    .navigation-links {
+        display: none;
+    }
+
+    .test-title {
+        font-size: 40px;
+        line-height: 50px;
+    }
+
+    .metrics-grid {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .metric-card {
+        width: 100%;
+        height: 148px;
+    }
+
+    .information-section {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .instructions-container,
+    .holland-card {
+        width: 100%;
+        min-height: auto;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .top-navigation {
+        width: calc(100% - 24px);
+        padding: 0 16px;
+    }
+
+    .logo img {
+        height: 42px;
+    }
+
+    .login-button {
+        height: 44px;
+        padding: 0 18px;
+        font-size: 14px;
+    }
+
+    .main-content {
+        padding: 112px 12px 32px;
+    }
+
+    .test-container {
+        padding: 32px 18px;
+        gap: 32px;
+        border-radius: 20px;
+    }
+
+    .test-title {
+        font-size: 32px;
+        line-height: 42px;
+    }
+
+    .test-description {
+        font-size: 15px;
+        line-height: 25px;
+    }
+
+    .metric-card {
+        padding: 20px;
+    }
+
+    .information-section {
+        gap: 32px;
+    }
+
+    .holland-card {
+        padding: 24px;
+    }
+
+    .instruction-content p,
+    .holland-description {
+        font-size: 14px;
+        line-height: 22px;
+    }
+
+    .start-test-button {
+        width: 100%;
+        max-width: 254px;
+        font-size: 21px;
+    }
+}
+
