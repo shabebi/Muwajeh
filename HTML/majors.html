@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>التخصصات | موّجه</title>
+    <link rel="icon" type="image/png" href="../LogoIcon.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Tajawal:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome Free -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+    <link rel="stylesheet" href="../CSS/majors.css">
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="top-navigation">
+
+        <a href="index.html" class="logo" aria-label="موّجه">
+            <img src="../Logo.png" alt="موّجه">
+        </a>
+
+        <nav class="navigation-links" aria-label="التنقل الرئيسي">
+
+            <a href="index.html" class="nav-link">
+                الرئيسية
+            </a>
+
+            <a href="test.html" class="nav-link">
+                اختبار التوجيه
+            </a>
+
+            <a href="universities.html" class="nav-link">
+                الجامعات
+            </a>
+
+            <a href="majors.html" class="nav-link active">
+                التخصصات
+            </a>
+
+            <a href="about.html" class="nav-link">
+                عن المنصة
+            </a>
+
+        </nav>
+
+        <a href="login.html" class="login-button">
+            تسجيل الدخول
+        </a>
+
+    </header>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main-content">
+
+        <!-- ================= PAGE HEADING ================= -->
+
+        <section class="page-heading">
+
+            <nav class="breadcrumb" aria-label="مسار الصفحة">
+
+                <a href="index.html">
+                    الرئيسية
+                </a>
+
+                <i class="fa-solid fa-chevron-left"></i>
+
+                <span class="current">
+                    التخصصات
+                </span>
+
+            </nav>
+
+            <h1>
+                دليل التخصصات الأكاديمية
+            </h1>
+
+            <p>
+                استكشف التخصصات الأكاديمية المتاحة، وتعرّف على المجالات والجامعات
+                التي تقدمها لتجد المسار المناسب لك.
+            </p>
+
+        </section>
+
+
+        <!-- ================= SEARCH + FILTER ================= -->
+
+        <section class="search-section">
+
+            <div class="search-box">
+
+                <button
+                    class="search-button"
+                    type="button"
+                    aria-label="البحث"
+                    id="searchButton"
+                >
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+
+                <label class="search-input-wrapper">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                        id="majorSearch"
+                        type="search"
+                        placeholder="ابحث عن تخصص أو جامعة أو مجال..."
+                        autocomplete="off"
+                    >
+
+                </label>
+
+            </div>
+
+            <div class="filter-row">
+
+                <button class="filter-button active" type="button" data-filter="all">
+                    جميع التخصصات
+                </button>
+
+                <button class="filter-button" type="button" data-filter="هندسي">
+                    هندسي
+                </button>
+
+                <button class="filter-button" type="button" data-filter="تقني">
+                    تقني
+                </button>
+
+                <button class="filter-button" type="button" data-filter="إداري">
+                    إداري
+                </button>
+
+            </div>
+
+            <p class="search-hint">
+                يمكنك البحث باسم التخصص أو الجامعة أو المجال الأكاديمي.
+            </p>
+
+        </section>
+
+
+        <!-- ================= RESULTS ================= -->
+
+        <section class="majors-section">
+
+            <div class="section-heading">
+
+                <div class="section-heading-title">
+                    <i class="fa-regular fa-star"></i>
+
+                    <h2>
+                        جميع التخصصات
+                    </h2>
+                </div>
+
+                <span class="results-count" id="resultsCount">
+                    14 تخصصاً
+                </span>
+
+            </div>
+
+
+            <div class="majors-grid" id="majorsGrid">
+
+                <!-- Engineering -->
+
+                <article class="major-card" data-type="هندسي" data-search="هندسة البرمجيات هندسي جامعة حضرموت كلية الهندسة">
+
+                    <button class="favorite-button" type="button" aria-label="إضافة هندسة البرمجيات للمفضلة">
+                        <i class="fa-regular fa-star"></i>
+                    </button>
+
+                    <div class="major-card-content">
+
+                        <span class="major-type">
+                            هندسي
+                        </span>
+
+                        <h3>
+                            هندسة البرمجيات
+                        </h3>
+
+                        <div class="major-university">
+                            <i class="fa-solid fa-building-columns"></i>
+                            <span>
+                                جامعة حضرموت
+                            </span>
+                        </div>
+
+                        <div class="major-faculty">
+                            كلية الهندسة
+                        </div>
+
+                        <a href="#" class="details-link">
+                            عرض التفاصيل
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <article class="major-card" data-type="هندسي" data-search="الهندسة المدنية هندسي جامعة حضرموت كلية الهندسة">
+
+                    <button class="favorite-button" type="button" aria-label="إضافة الهندسة المدنية للمفضلة">
+                        <i class="fa-regular fa-star"></i>
+                    </button>
+
+                    <div class="major-card-content">
+
+                        <span class="major-type">
+                            هندسي
+                        </span>
+
+                        <h3>
+                            الهندسة المدنية
+                        </h3>
+
+                        <div class="major-university">
+                            <i class="fa-solid fa-building-columns"></i>
+                            <span>
+                                جامعة حضرموت
+                            </span>
+                        </div>
+
+                        <div class="major-faculty">
+                            كلية الهندسة
+                        </div>
+
+                        <a href="#" class="details-link">
+                            عرض التفاصيل
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <article class="major-card" data-type="هندسي" data-search="الهندسة المعمارية هندسي جامعة حضرموت كلية الهندسة">
+
+                    <button class="favorite-button" type="button" aria-label="إضافة الهندسة المعمارية للمفضلة">
+                        <i class="fa-regular fa-star"></i>
+                    </button>
+
+                    <div class="major-card-content">
+
+                        <span class="major-type">
+                            هندسي
+                        </span>
+
+                        <h3>
+                            الهندسة المعمارية
+                        </h3>
+
+                        <div class="major-university">
+                            <i class="fa-solid fa-building-columns"></i>
+                            <span>
+                                جامعة حضرموت
+                            </span>
+                        </div>
+
+                        <div class="major-faculty">
+                            كلية الهندسة
+                        </div>
+
+                        <a href="#" class="details-link">
+                            عرض التفاصيل
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <article class="major-card" data-type="هندسي" data-search="الهندسة الكهربائية هندسي جامعة حضرموت كلية الهندسة">
+
+                    <button class="favorite-button" type="button" aria-label="إضافة الهندسة الكهربائية للمفضلة">
+                        <i class="fa-regular fa-star"></i>
+                    </button>
+
+                    <div class="major-card-content">
+
+                        <span class="major-type">
+                            هندسي
+                        </span>
+
+                        <h3>
+                            الهندسة الكهربائية
+                        </h3>
+
+                        <div class="major-university">
+                            <i class="fa-solid fa-building-columns"></i>
+                            <span>
+                                جامعة حضرموت
+                            </span>
+                        </div>
+
+                        <div class="major-faculty">
+                            كلية الهندسة
+                        </div>
+
+                        <a href="#" class="details-link">
+                            عرض التفاصيل
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <article class="major-card" data-type="هندسي" data-search="الهندسة الميكانيكية هندسي جامعة حضرموت كلية الهندسة">
+
+                    <button class="favorite-button" type="button" aria-label="إضافة الهندسة الميكانيكية للمفضلة">
+                        <i class="fa-regular fa-star"></i>
+                    </button>
+
+                    <div class="major-card-content">
+
+                        <span class="major-type">
+                            هندسي
+                        </span>
+
+                        <h3>
+                            الهندسة الميكانيكية
+                        </h3>
+
+                        <div class="major-university">
+                            <i class="fa-solid fa-building-columns"></i>
+                            <span>
+                                جامعة حضرموت
+                            </span>
+                        </div>
+
+                        <div class="major-faculty">
+                            كلية الهندسة
+                        </div>
+
+                        <a href="#" class="details-link">
+                            عرض التفاصيل
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <article class="major-card" data-type="هندسي" data-search="هندسة الاتصالات هندسي جامعة حضرموت كلية الهندسة">
+
+                    <button class="favorite-button" type="button" aria-label="إضافة هندسة الاتصالات للمفضلة">
+                        <i class="fa-regular fa-star"></i>
+                    </button>
+
+                    <div class="major-card-content">
+
+                        <span class="major-type">
+                            هندسي
+                        </span>
+
+                        <h3>
+                            هندسة الاتصالات
+                        </h3>
+
+                        <div class="major-university">
+                            <i class="fa-solid fa-building-columns"></i>
+                            <span>
+                                جامعة حضرموت
+                            </span>
+                        </div>
+
+                        <div class="major-faculty">
+                            كلية الهندسة
+                        </div>
+
+                        <a href="#" class="details-link">
+                            عرض التفاصيل
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <!-- Computing -->
+
+                <article class="major-card" data-type="تقني" data-search="علوم الحاسوب تقني جامعة حضرموت كلية الحاسبات">
+
+                    <button class="favorite-button" type="button" aria-label="إضافة علوم الحاسوب للمفضلة">
+                        <i class="fa-regular fa-star"></i>
+                    </button>
+
+                    <div class="major-card-content">
+
+                        <span class="major-type">
+                            تقني
+                        </span>
+
+                        <h3>
+                            علوم الحاسوب
+                        </h3>
+
+                        <div class="major-university">
+                            <i class="fa-solid fa-building-columns"></i>
+                            <span>
+                                جامعة حضرموت
+                            </span>
+                        </div>
+
+                        <div class="major-faculty">
+                            كلية الحاسبات
+                        </div>
+
+                        <a href="#" class="details-link">
+                            عرض التفاصيل
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <article class="major-card" data-type="تقني" data-search="نظم المعلومات تقني جامعة حضرموت كلية الحاسبات">
+
+                    <button class="favorite-button" type="button" aria-label="إضافة نظم المعلومات للمفضلة">
+                        <i class="fa-regular fa-star"></i>
+                    </button>
+
+                    <div class="major-card-content">
+
+                        <span class="major-type">
+                            تقني
+                        </span>
+
+                        <h3>
+                            نظم المعلومات
+                        </h3>
+
+                        <div class="major-university">
+                            <i class="fa-solid fa-building-columns"></i>
+                            <span>
+                                جامعة حضرموت
+                            </span>
+                        </div>
+
+                        <div class="major-faculty">
+                            كلية الحاسبات
+                        </div>
+
+                        <a href="#" class="details-link">
+                            عرض التفاصيل
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <article class="major-card" data-type="تقني" data-search="تكنولوجيا المعلومات تقني جامعة حضرموت كلية الحاسبات">
+
+                    <button class="favorite-button" type="button" aria-label="إضافة تكنولوجيا المعلومات للمفضلة">
+                        <i class="fa-regular fa-star"></i>
+                    </button>
+
+                    <div class="major-card-content">
+
+                        <span class="major-type">
+                            تقني
+                        </span>
+
+                        <h3>
+                            تكنولوجيا المعلومات
+                        </h3>
+
+                        <div class="major-university">
+                            <i class="fa-solid fa-building-columns"></i>
+                            <span>
+                                جامعة حضرموت
+                            </span>
+                        </div>
+
+                        <div class="major-faculty">
+                            كلية الحاسبات
+                        </div>
+
+                        <a href="#" class="details-link">
+                            عرض التفاصيل
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <article class="major-card" data-type="تقني" data-search="الأمن السيبراني تقني جامعة حضرموت كلية الحاسبات">
+
+                    <button class="favorite-button" type="button" aria-label="إضافة الأمن السيبراني للمفضلة">
+                        <i class="fa-regular fa-star"></i>
+                    </button>
+
+                    <div class="major-card-content">
+
+                        <span class="major-type">
+                            تقني
+                        </span>
+
+                        <h3>
+                            الأمن السيبراني
+                        </h3>
+
+                        <div class="major-university">
+                            <i class="fa-solid fa-building-columns"></i>
+                            <span>
+                                جامعة حضرموت
+                            </span>
+                        </div>
+
+                        <div class="major-faculty">
+                            كلية الحاسبات
+                        </div>
+
+                        <a href="#" class="details-link">
+                            عرض التفاصيل
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <!-- Business -->
+
+                <article class="major-card" data-type="إداري" data-search="المحاسبة إداري جامعة حضرموت العلوم الإدارية">
+
+                    <button class="favorite-button" type="button" aria-label="إضافة المحاسبة للمفضلة">
+                        <i class="fa-regular fa-star"></i>
+                    </button>
+
+                    <div class="major-card-content">
+
+                        <span class="major-type">
+                            إداري
+                        </span>
+
+                        <h3>
+                            المحاسبة
+                        </h3>
+
+                        <div class="major-university">
+                            <i class="fa-solid fa-building-columns"></i>
+                            <span>
+                                جامعة حضرموت
+                            </span>
+                        </div>
+
+                        <div class="major-faculty">
+                            العلوم الإدارية
+                        </div>
+
+                        <a href="#" class="details-link">
+                            عرض التفاصيل
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <article class="major-card" data-type="إداري" data-search="إدارة الأعمال إداري جامعة حضرموت العلوم الإدارية">
+
+                    <button class="favorite-button" type="button" aria-label="إضافة إدارة الأعمال للمفضلة">
+                        <i class="fa-regular fa-star"></i>
+                    </button>
+
+                    <div class="major-card-content">
+
+                        <span class="major-type">
+                            إداري
+                        </span>
+
+                        <h3>
+                            إدارة الأعمال
+                        </h3>
+
+                        <div class="major-university">
+                            <i class="fa-solid fa-building-columns"></i>
+                            <span>
+                                جامعة حضرموت
+                            </span>
+                        </div>
+
+                        <div class="major-faculty">
+                            العلوم الإدارية
+                        </div>
+
+                        <a href="#" class="details-link">
+                            عرض التفاصيل
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <article class="major-card" data-type="إداري" data-search="التسويق إداري جامعة حضرموت العلوم الإدارية">
+
+                    <button class="favorite-button" type="button" aria-label="إضافة التسويق للمفضلة">
+                        <i class="fa-regular fa-star"></i>
+                    </button>
+
+                    <div class="major-card-content">
+
+                        <span class="major-type">
+                            إداري
+                        </span>
+
+                        <h3>
+                            التسويق
+                        </h3>
+
+                        <div class="major-university">
+                            <i class="fa-solid fa-building-columns"></i>
+                            <span>
+                                جامعة حضرموت
+                            </span>
+                        </div>
+
+                        <div class="major-faculty">
+                            العلوم الإدارية
+                        </div>
+
+                        <a href="#" class="details-link">
+                            عرض التفاصيل
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <article class="major-card" data-type="إداري" data-search="التمويل والمصارف إداري جامعة حضرموت العلوم الإدارية">
+
+                    <button class="favorite-button" type="button" aria-label="إضافة التمويل والمصارف للمفضلة">
+                        <i class="fa-regular fa-star"></i>
+                    </button>
+
+                    <div class="major-card-content">
+
+                        <span class="major-type">
+                            إداري
+                        </span>
+
+                        <h3>
+                            التمويل والمصارف
+                        </h3>
+
+                        <div class="major-university">
+                            <i class="fa-solid fa-building-columns"></i>
+                            <span>
+                                جامعة حضرموت
+                            </span>
+                        </div>
+
+                        <div class="major-faculty">
+                            العلوم الإدارية
+                        </div>
+
+                        <a href="#" class="details-link">
+                            عرض التفاصيل
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </a>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <div class="no-results" id="noResults" hidden>
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <h3>لم يتم العثور على تخصصات</h3>
+                <p>
+                    جرّب البحث بكلمة أخرى أو اختر مجالاً مختلفاً.
+                </p>
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="site-footer">
+
+        <div class="footer-container">
+
+            <!-- Brand -->
+            <div class="footer-brand">
+
+                <a href="index.html" class="footer-logo">
+                    <img src="../Logo.png" alt="موّجه">
+                </a>
+
+                <p class="footer-description">
+                    منصتك الذكية لاكتشاف التخصصات والجامعات المناسبة
+                    لك، وبناء مستقبل أكاديمي يتناسب مع ميولك وقدراتك.
+                </p>
+
+            </div>
+
+
+            <!-- Quick Links -->
+            <div class="footer-column">
+
+                <h3 class="footer-title">
+                    روابط سريعة
+                </h3>
+
+                <a href="index.html" class="footer-link">
+                    الرئيسية
+                </a>
+
+                <a href="test.html" class="footer-link">
+                    اختبار التوجيه
+                </a>
+
+                <a href="universities.html" class="footer-link">
+                    الجامعات
+                </a>
+
+                <a href="majors.html" class="footer-link">
+                    التخصصات
+                </a>
+
+                <a href="about.html" class="footer-link">
+                    عن المنصة
+                </a>
+
+            </div>
+
+
+            <!-- Services -->
+            <div class="footer-column">
+
+                <h3 class="footer-title">
+                    خدماتنا
+                </h3>
+
+                <a href="#" class="footer-link">
+                    اختبار تحديد التخصص
+                </a>
+
+                <a href="#" class="footer-link">
+                    استكشاف التخصصات
+                </a>
+
+                <a href="#" class="footer-link">
+                    دليل الجامعات
+                </a>
+
+            </div>
+
+
+            <!-- Contact -->
+            <div class="footer-column footer-contact">
+
+                <h3 class="footer-title">
+                    تواصل معنا
+                </h3>
+
+                <a href="mailto:info@muwajeh.com" class="footer-contact-item">
+                    <span class="footer-icon">
+                        <i class="fa-solid fa-envelope"></i>
+                    </span>
+
+                    <span>info@muwajeh.com</span>
+                </a>
+
+                <a href="#" class="footer-contact-item">
+                    <span class="footer-icon">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </span>
+
+                    <span>المملكة العربية السعودية</span>
+                </a>
+
+                <div class="footer-socials">
+
+                    <a href="#" aria-label="X">
+                        <i class="fa-brands fa-x-twitter"></i>
+                    </a>
+
+                    <a href="#" aria-label="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+
+                    <a href="#" aria-label="LinkedIn">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Bottom -->
+        <div class="footer-bottom">
+
+            <div class="footer-bottom-container">
+
+                <p>
+                    © 2026 موّجه. جميع الحقوق محفوظة.
+                </p>
+
+                <div class="footer-bottom-links">
+
+                    <a href="#">
+                        سياسة الخصوصية
+                    </a>
+
+                    <span>•</span>
+
+                    <a href="#">
+                        شروط الاستخدام
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+    <script src="../JS/majors.js"></script>
+
+</body>
+</html>
