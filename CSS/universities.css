@@ -1,25 +1,25 @@
 /* =========================================================
-   موّجه — TEST PAGE
-   Arabic / RTL
-   Based on the supplied Figma specifications
+   موّجه — UNIVERSITIES PAGE
+   Built to match the supplied design and the existing
+   Muwajeh site CSS system.
    ========================================================= */
 
 :root {
     --color-primary: #0A1D38;
     --color-secondary: #C29447;
     --color-tertiary: #1E304C;
+    --color-neutral: #F8FAFC;
 
-    --color-page: #F7F9FB;
     --color-white: #FFFFFF;
+    --color-black: #000000;
 
-    --color-heading: #0F172A;
     --color-text: #44474D;
-    --color-muted: #68717C;
-
+    --color-text-muted: #68717C;
     --color-border: #E2E8F0;
 
     --font-headline: "Tajawal", sans-serif;
     --font-body: "Cairo", sans-serif;
+    --font-label: "Cairo", sans-serif;
 
     --container-width: 1280px;
 
@@ -46,21 +46,15 @@ body {
     margin: 0;
     min-width: 320px;
 
-    background: var(--color-page);
+    direction: rtl;
+
+    background: var(--color-neutral);
     color: var(--color-text);
 
     font-family: var(--font-body);
     line-height: 1.6;
 
-    direction: rtl;
     text-align: right;
-}
-
-button,
-input,
-textarea,
-select {
-    font: inherit;
 }
 
 a {
@@ -76,6 +70,7 @@ img {
 
 /* =========================================================
    HEADER
+   Same design system as the rest of the website.
    ========================================================= */
 
 .top-navigation {
@@ -107,7 +102,8 @@ img {
 
     border: 1px solid rgba(255, 255, 255, 0.2);
 
-    box-shadow: 0 10px 30px rgba(10, 29, 56, 0.04);
+    box-shadow:
+        0 10px 30px rgba(10, 29, 56, 0.04);
 
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
@@ -124,13 +120,17 @@ img {
 }
 
 .logo img {
+    display: block;
+
     width: auto;
     height: 48px;
+
     object-fit: contain;
 }
 
 .navigation-links {
     display: flex;
+
     align-items: center;
     justify-content: center;
 
@@ -138,7 +138,8 @@ img {
 
     height: 100%;
 
-    margin-inline: auto;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .nav-link {
@@ -183,11 +184,13 @@ img {
     height: 5px;
 
     background: var(--color-secondary);
+
     border-radius: 50%;
 }
 
 .login-button {
     display: flex;
+
     align-items: center;
     justify-content: center;
 
@@ -220,558 +223,330 @@ img {
 
 
 /* =========================================================
-   MAIN CONTENT
-   Figma:
-   width 1280px / max-width 1280px
-   padding 128px 24px 48px
+   MAIN
    ========================================================= */
 
 .main-content {
     width: 100%;
-    max-width: var(--container-width);
+    max-width: 1280px;
 
-    min-height: 1177px;
+    min-height: 1007px;
 
     margin: 0 auto;
 
-    padding: 128px 24px 48px;
+    padding-top: 128px;
 
     display: flex;
     flex-direction: column;
-
     align-items: flex-start;
-
-    gap: 24px;
 }
 
 
 /* =========================================================
-   MAIN WHITE TEST CONTAINER
-   Figma:
-   width 1232px
-   padding 48px
-   gap 48px
-   border-radius 24px
+   PAGE CONTENT
    ========================================================= */
 
-.test-container {
-    box-sizing: border-box;
-
+.page-content {
     width: 100%;
-    min-height: 1001px;
 
-    padding: 48px;
+    padding: 0 48px 96px;
 
     display: flex;
     flex-direction: column;
-
-    align-items: center;
-
-    gap: 48px;
-
-    background: var(--color-white);
-
-    border: 1px solid var(--color-border);
-
-    box-shadow:
-        0 10px 30px rgba(10, 29, 56, 0.04);
-
-    border-radius: 24px;
-
-    position: relative;
-    isolation: isolate;
-}
-
-
-/* =========================================================
-   INTRO
-   Figma:
-   width 768px
-   gap 16px
-   ========================================================= */
-
-.intro-container {
-    width: 100%;
-    max-width: 768px;
-
-    display: flex;
-    flex-direction: column;
-
-    align-items: center;
-
-    gap: 16px;
-
-    text-align: center;
-}
-
-
-/* Badge */
-
-.test-badge {
-    width: 192px;
-    height: 28px;
-
-    padding: 6px 16px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: var(--color-tertiary);
-
-    border-radius: 9999px;
-}
-
-.test-badge span {
-    color: #FFFFFF;
-
-    font-family: var(--font-body);
-
-    font-size: 12px;
-    font-weight: 500;
-
-    line-height: 16px;
-
-    white-space: nowrap;
-}
-
-
-/* Main title */
-
-.test-title {
-    width: 100%;
-    max-width: 757px;
-
-    margin: 0;
-
-    color: var(--color-heading);
-
-    font-family: var(--font-headline);
-
-    font-size: 48px;
-    font-weight: 700;
-
-    line-height: 60px;
-
-    text-align: center;
-}
-
-
-/* Description */
-
-.test-description {
-    width: 100%;
-    max-width: 720px;
-
-    margin: 0;
-
-    color: var(--color-text);
-
-    font-family: var(--font-body);
-
-    font-size: 18px;
-    font-weight: 400;
-
-    line-height: 28px;
-
-    text-align: center;
-}
-
-
-/* =========================================================
-   METRICS GRID
-   Figma:
-   width 1134px
-   height 148px
-   gap 24px
-   ========================================================= */
-
-.metrics-grid {
-    width: 100%;
-    max-width: 1134px;
-
-    min-height: 148px;
-
-    display: flex;
-    flex-direction: row;
-
-    justify-content: center;
-    align-items: stretch;
-
-    gap: 24px;
-}
-
-
-/* Metric card */
-
-.metric-card {
-    box-sizing: border-box;
-
-    flex: 1 1 0;
-
-    min-width: 0;
-    height: 148px;
-
-    padding: 24px;
-
-    display: flex;
-    flex-direction: column;
-
-    align-items: center;
-    justify-content: flex-start;
-
-    background: #F7F9FB;
-
-    border: 1px solid var(--color-border);
-
-    border-radius: 24px;
-
-    text-align: center;
-}
-
-
-/* Metric icon */
-
-.metric-icon {
-    width: 30px;
-    height: 30px;
-
-    margin-bottom: 12px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: var(--color-secondary);
-
-    color: #FFFFFF;
-
-    border-radius: 50%;
-
-    font-size: 13px;
-}
-
-
-/* Metric label */
-
-.metric-label {
-    color: var(--color-text);
-
-    font-family: var(--font-body);
-
-    font-size: 14px;
-    font-weight: 600;
-
-    line-height: 20px;
-
-    text-align: center;
-}
-
-
-/* Metric value */
-
-.metric-value {
-    margin-top: 2px;
-
-    color: var(--color-heading);
-
-    font-family: var(--font-headline);
-
-    font-size: 24px;
-    font-weight: 700;
-
-    line-height: 32px;
-
-    text-align: center;
-}
-
-
-/* =========================================================
-   INFORMATION SECTION
-   Figma:
-   width 1134px
-   height 278px
-   gap 48px
-   ========================================================= */
-
-.information-section {
-    width: 100%;
-    max-width: 1134px;
-
-    min-height: 278px;
-
-    display: flex;
-    flex-direction: row;
-
-    justify-content: center;
-    align-items: stretch;
+    align-items: flex-start;
 
     gap: 48px;
 }
 
 
 /* =========================================================
-   INSTRUCTIONS
+   PAGE TITLE BANNER
    ========================================================= */
 
-.instructions-container {
-    flex: 1 1 0;
-
-    min-width: 0;
-    min-height: 278px;
-
-    padding-bottom: 6px;
+.page-title-banner {
+    width: 100%;
+    height: 104px;
 
     display: flex;
     flex-direction: column;
-
-    align-items: flex-start;
-
-    gap: 24px;
-}
-
-.section-title {
-    width: 100%;
-
-    margin: 0;
-
-    color: var(--color-heading);
-
-    font-family: var(--font-headline);
-
-    font-size: 24px;
-    font-weight: 700;
-
-    line-height: 32px;
-
-    text-align: right;
-}
-
-
-/* Instruction list */
-
-.instruction-list {
-    width: 100%;
-
-    display: flex;
-    flex-direction: column;
-
-    gap: 24px;
-}
-
-
-/* Instruction item */
-
-.instruction-item {
-    width: 100%;
-
-    min-height: 48px;
-
-    display: flex;
-    flex-direction: row;
 
     align-items: flex-start;
 
     gap: 16px;
 
     direction: rtl;
+    text-align: right;
 }
 
+.page-badge,
+.page-title,
+.page-description {
+    align-self: flex-start;
+}
+.page-badge {
+    width: 200pxpx;
+    height: 28px;
 
-/* Text content */
-
-.instruction-content {
-    flex: 1;
-
-    min-width: 0;
+    padding: 6px 16px;
 
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 
-    gap: 4px;
-}
+    align-items: center;
 
-.instruction-content h3 {
-    margin: 0;
+    gap: 8px;
 
-    color: var(--color-heading);
+    background: var(--color-secondary);
+
+    box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.05);
+
+    border-radius: 9999px;
+
+    color: var(--color-primary);
 
     font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 16px;
+}
 
-    font-size: 14px;
-    font-weight: 600;
+.page-badge i {
+    font-size: 11px;
+}
 
+.page-title {
+    width: 267.42px;
+
+    margin: 0;
+
+    color: var(--color-primary);
+
+    font-family: var(--font-headline);
+    font-size: 16px;
+    font-weight: 400;
     line-height: 20px;
 
     text-align: right;
 }
 
-.instruction-content p {
+.page-description {
+    width: 659.3px;
+
     margin: 0;
 
     color: var(--color-text);
 
     font-family: var(--font-body);
-
     font-size: 16px;
     font-weight: 400;
-
     line-height: 24px;
 
     text-align: right;
 }
 
 
-/* Instruction icon */
+/* =========================================================
+   UNIVERSITIES AREA
 
-.instruction-icon {
-    width: 40px;
-    height: 40px;
+   IMPORTANT:
+   The supplied screenshot has:
+   LEFT  = coming-soon card
+   RIGHT = active university card
 
-    flex-shrink: 0;
+   We therefore deliberately use RTL visual ordering here.
+   ========================================================= */
+
+.universities-grid {
+    width: 100%;
+    height: 400px;
 
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: row;
 
-    background: rgba(10, 29, 56, 0.1);
+    justify-content: flex-start;
+    align-items: flex-start;
 
-    color: var(--color-secondary);
+    gap: 24px;
 
-    border: 1px solid var(--color-secondary);
-
-    border-radius: 9999px;
-
-    font-size: 15px;
+    direction: rtl;
 }
 
 
 /* =========================================================
-   HOLLAND CARD
-   Figma:
-   width 543px
-   height 278px
-   padding 32px
-   background #F8FAFC
+   ACTIVE UNIVERSITY CARD
    ========================================================= */
 
-.holland-card {
-    flex: 1 1 0;
+.university-card {
+    box-sizing: border-box;
 
-    min-width: 0;
-    min-height: 278px;
+    width: calc(100% - 402.67px);
+    height: 400px;
+
+    flex: 0 0 calc(100% - 402.67px);
+
+    display: flex;
+    flex-direction: row;
+
+    align-items: stretch;
+
+    padding: 0;
+
+    background: rgba(255, 255, 255, 0.85);
+
+    border-width: 1px 1px 1px 4px;
+    border-style: solid;
+    border-color: rgba(10, 29, 56, 0.1);
+
+    box-shadow:
+        inset -40px 40px 100px -50px rgba(10, 29, 56, 0.05);
+
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+
+    border-radius: 24px;
+
+    overflow: hidden;
+
+    direction: ltr;
+
+    order: 1;
+}
+
+
+/* =========================================================
+   UNIVERSITY INFORMATION
+   ========================================================= */
+
+.university-info {
+    width: calc(100% - 323.47px);
+    height: 398px;
+
+    flex: 1 1 auto;
 
     padding: 32px;
 
     display: flex;
     flex-direction: column;
 
+    justify-content: center;
     align-items: flex-start;
 
-    gap: 16px;
+    gap: 24px;
 
-    background: #F8FAFC;
-
-    border: 1px solid var(--color-border);
-
-    border-radius: 24px;
+    direction: rtl;
 }
 
-.holland-description {
+
+/* University title */
+
+.university-title {
     width: 100%;
+    min-height: 64px;
+
+    margin: 0;
+
+    color: var(--color-primary);
+
+    font-family: var(--font-headline);
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 32px;
+
+    text-align: right;
+}
+
+.university-title span {
+    display: inline;
+}
+
+
+/* =========================================================
+   DETAILS
+   ========================================================= */
+
+.university-details {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+.detail-row {
+    width: 100%;
+    min-height: 24px;
+
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+    justify-content: flex-start;
+
+    gap: 12px;
+
+    direction: rtl;
+}
+
+.detail-text {
+    flex: 1;
+
+    color: var(--color-text);
+
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+
+    text-align: right;
+}
+
+.detail-icon {
+    flex: 0 0 auto;
+
+    color: var(--color-secondary);
+
+    font-size: 16px;
+
+    width: 18px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   UNIVERSITY DESCRIPTION
+   ========================================================= */
+
+.university-description {
+    width: 100%;
+    max-width: 354px;
 
     margin: 0;
 
     color: var(--color-text);
 
     font-family: var(--font-body);
-
     font-size: 16px;
     font-weight: 400;
-
-    line-height: 24px;
+    line-height: 26px;
 
     text-align: right;
 }
 
 
-/* RIASEC tags */
-
-.riasec-tags {
-    width: 100%;
-
-    display: flex;
-    flex-wrap: wrap;
-
-    align-items: center;
-    justify-content: flex-start;
-
-    gap: 10px;
-
-    margin-top: auto;
-
-    direction: rtl;
-}
-
-.riasec-tags span {
-    padding: 4px 12px;
-
-    background: #FFFFFF;
-
-    border: 1px solid var(--color-border);
-
-    border-radius: 9999px;
-
-    color: var(--color-text);
-
-    font-family: var(--font-body);
-
-    font-size: 14px;
-    font-weight: 500;
-
-    line-height: 20px;
-
-    white-space: nowrap;
-}
-
-
 /* =========================================================
-   CTA
-   Figma:
-   width 1134px
-   height 97px
-   border-top
-   padding-top 32px
+   UNIVERSITY BUTTON
    ========================================================= */
 
-.test-cta {
-    box-sizing: border-box;
+.university-button {
+    width: 220.35px;
+    height: 44px;
 
-    width: 100%;
-    max-width: 1134px;
+    margin-top: 0;
 
-    height: 97px;
-
-    padding-top: 32px;
-
-    display: flex;
-    flex-direction: column;
-
-    align-items: center;
-
-    gap: 16px;
-
-    border-top: 1px solid var(--color-border);
-}
-
-
-/* Start button */
-
-.start-test-button {
-    width: 254px;
-    height: 64px;
-
-    padding: 16px 32px;
+    padding: 12px 24px;
 
     display: flex;
     flex-direction: row;
@@ -779,171 +554,229 @@ img {
     align-items: center;
     justify-content: center;
 
-    gap: 12px;
+    gap: 8px;
 
     background: var(--color-secondary);
-
-    color: var(--color-heading);
+    color: #FFFFFF;
 
     border-radius: 9999px;
 
-    font-family: var(--font-headline);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+
+    transition:
+        background-color var(--transition),
+        transform var(--transition);
+}
+
+.university-button:hover {
+    background: #B1843D;
+    transform: translateY(-1px);
+}
+
+.university-button i {
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   UNIVERSITY IMAGE
+   ========================================================= */
+
+.university-image {
+    width: 323.47px;
+    height: 398px;
+
+    flex: 0 0 323.47px;
+
+    overflow: hidden;
+
+    direction: ltr;
+}
+
+.university-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+/* =========================================================
+   COMING SOON CARD
+   ========================================================= */
+
+.coming-soon-card {
+    box-sizing: border-box;
+
+    width: 378.67px;
+    height: 400px;
+
+    flex: 0 0 378.67px;
+
+    min-height: 400px;
+
+    padding: 60px 32px;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 24px;
+
+    background: rgba(255, 255, 255, 0.4);
+
+    border: 2px dashed #E2E8F0;
+
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+
+    border-radius: 24px;
+
+    direction: rtl;
+
+    order: 2;
+}
+
+
+/* Plus circle */
+
+.coming-soon-icon {
+    position: relative;
+
+    width: 64px;
+    height: 64px;
+
+    flex: 0 0 64px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #ECEEF0;
+
+    box-shadow:
+        inset 0 2px 4px rgba(0, 0, 0, 0.05);
+
+    border-radius: 9999px;
+
+    color: var(--color-primary);
 
     font-size: 24px;
-    font-weight: 700;
+}
 
+.coming-soon-icon::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background: var(--color-secondary);
+
+    opacity: 0.2;
+
+    filter: blur(6px);
+
+    border-radius: 9999px;
+
+    z-index: -1;
+}
+
+
+/* Coming soon content */
+
+.coming-soon-content {
+    width: 310.66px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 12px;
+
+    text-align: center;
+}
+
+.coming-soon-content h2 {
+    width: 100%;
+
+    margin: 0;
+
+    color: var(--color-primary);
+
+    font-family: var(--font-headline);
+    font-size: 24px;
+    font-weight: 600;
     line-height: 32px;
 
     text-align: center;
-
-    transition:
-        transform var(--transition),
-        filter var(--transition);
 }
 
-.start-test-button:hover {
-    transform: translateY(-2px);
-    filter: brightness(0.96);
-}
+.coming-soon-content p {
+    width: 100%;
+    max-width: 301.77px;
 
-.start-test-button i {
+    margin: 0;
+
+    color: var(--color-text);
+
+    font-family: var(--font-body);
     font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+
+    text-align: center;
+}
+
+
+/* Coming soon badge */
+
+.coming-soon-badge {
+    height: 28px;
+
+    padding: 6px 16px;
+
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    background: #E6E8EA;
+
+    border-radius: 9999px;
+
+    color: var(--color-text);
+
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+}
+
+.coming-soon-badge i {
+    font-size: 10px;
 }
 
 
 /* =========================================================
-   RESPONSIVE
-   ========================================================= */
-
-@media (max-width: 1050px) {
-
-    .navigation-links {
-        gap: 22px;
-    }
-
-    .nav-link {
-        font-size: 16px;
-    }
-
-    .login-button {
-        padding: 0 22px;
-        font-size: 16px;
-    }
-
-    .test-container {
-        padding: 40px 32px;
-    }
-
-    .metrics-grid,
-    .information-section,
-    .test-cta {
-        max-width: 100%;
-    }
-}
-
-
-@media (max-width: 850px) {
-
-    .navigation-links {
-        display: none;
-    }
-
-    .test-title {
-        font-size: 40px;
-        line-height: 50px;
-    }
-
-    .metrics-grid {
-        flex-direction: column;
-        height: auto;
-    }
-
-    .metric-card {
-        width: 100%;
-        height: 148px;
-    }
-
-    .information-section {
-        flex-direction: column;
-        height: auto;
-    }
-
-    .instructions-container,
-    .holland-card {
-        width: 100%;
-        min-height: auto;
-    }
-}
-
-
-@media (max-width: 600px) {
-
-    .top-navigation {
-        width: calc(100% - 24px);
-        padding: 0 16px;
-    }
-
-    .logo img {
-        height: 42px;
-    }
-
-    .login-button {
-        height: 44px;
-        padding: 0 18px;
-        font-size: 14px;
-    }
-
-    .main-content {
-        padding: 112px 12px 32px;
-    }
-
-    .test-container {
-        padding: 32px 18px;
-        gap: 32px;
-        border-radius: 20px;
-    }
-
-    .test-title {
-        font-size: 32px;
-        line-height: 42px;
-    }
-
-    .test-description {
-        font-size: 15px;
-        line-height: 25px;
-    }
-
-    .metric-card {
-        padding: 20px;
-    }
-
-    .information-section {
-        gap: 32px;
-    }
-
-    .holland-card {
-        padding: 24px;
-    }
-
-    .instruction-content p,
-    .holland-description {
-        font-size: 14px;
-        line-height: 22px;
-    }
-
-    .start-test-button {
-        width: 100%;
-        max-width: 254px;
-        font-size: 21px;
-    }
-}
-
-/* =========================================================
-   FOOTER — LIGHT VERSION
+   FOOTER
+   Uses the exact footer structure in the HTML you supplied.
    ========================================================= */
 
 .site-footer {
     position: relative;
+
+    width: 100%;
 
     margin-top: 80px;
 
@@ -952,15 +785,14 @@ img {
     color: var(--color-primary);
 
     border-top: 1px solid #E4E8ED;
+
     border-radius: 32px 32px 0 0;
 
     overflow: hidden;
 }
 
 
-/* =========================================================
-   SUBTLE DECORATION
-   ========================================================= */
+/* Footer decoration */
 
 .site-footer::before {
     content: "";
@@ -983,13 +815,10 @@ img {
 }
 
 
-/* =========================================================
-   FOOTER CONTAINER
-   ========================================================= */
+/* Footer container */
 
 .footer-container {
     position: relative;
-
     z-index: 1;
 
     width: calc(100% - 48px);
@@ -1009,9 +838,7 @@ img {
 }
 
 
-/* =========================================================
-   BRAND
-   ========================================================= */
+/* Brand */
 
 .footer-brand {
     max-width: 330px;
@@ -1019,7 +846,6 @@ img {
 
 .footer-logo {
     display: inline-flex;
-
     align-items: center;
 }
 
@@ -1036,22 +862,17 @@ img {
     color: #68717C;
 
     font-family: var(--font-body);
-
     font-size: 13px;
-
     line-height: 2;
 
     text-align: right;
 }
 
 
-/* =========================================================
-   FOOTER COLUMNS
-   ========================================================= */
+/* Footer columns */
 
 .footer-column {
     display: flex;
-
     flex-direction: column;
 
     align-items: flex-start;
@@ -1065,16 +886,10 @@ img {
     color: var(--color-primary);
 
     font-family: var(--font-headline);
-
     font-size: 18px;
-
     font-weight: 700;
-
     line-height: 1.4;
 }
-
-
-/* Gold line */
 
 .footer-title::after {
     content: "";
@@ -1092,9 +907,7 @@ img {
 }
 
 
-/* =========================================================
-   FOOTER LINKS
-   ========================================================= */
+/* Footer links */
 
 .footer-link {
     margin-bottom: 11px;
@@ -1102,28 +915,21 @@ img {
     color: #68717C;
 
     font-family: var(--font-body);
-
     font-size: 13px;
-
     line-height: 1.7;
 
-    text-decoration: none;
-
     transition:
-        color 180ms ease,
-        transform 180ms ease;
+        color var(--transition),
+        transform var(--transition);
 }
 
 .footer-link:hover {
     color: var(--color-secondary);
-
     transform: translateX(-3px);
 }
 
 
-/* =========================================================
-   CONTACT
-   ========================================================= */
+/* Contact */
 
 .footer-contact-item {
     display: flex;
@@ -1137,20 +943,14 @@ img {
     color: #68717C;
 
     font-family: var(--font-body);
-
     font-size: 12px;
 
-    text-decoration: none;
-
-    transition: color 180ms ease;
+    transition: color var(--transition);
 }
 
 .footer-contact-item:hover {
     color: var(--color-primary);
 }
-
-
-/* Contact icon */
 
 .footer-icon {
     width: 30px;
@@ -1175,9 +975,7 @@ img {
 }
 
 
-/* =========================================================
-   SOCIAL MEDIA
-   ========================================================= */
+/* Socials */
 
 .footer-socials {
     display: flex;
@@ -1208,13 +1006,11 @@ img {
 
     font-size: 13px;
 
-    text-decoration: none;
-
     transition:
-        background-color 180ms ease,
-        color 180ms ease,
-        border-color 180ms ease,
-        transform 180ms ease;
+        background-color var(--transition),
+        color var(--transition),
+        border-color var(--transition),
+        transform var(--transition);
 }
 
 .footer-socials a:hover {
@@ -1228,9 +1024,7 @@ img {
 }
 
 
-/* =========================================================
-   FOOTER BOTTOM
-   ========================================================= */
+/* Footer bottom */
 
 .footer-bottom {
     position: relative;
@@ -1264,7 +1058,6 @@ img {
     color: #8A929D;
 
     font-family: var(--font-body);
-
     font-size: 11px;
 }
 
@@ -1278,16 +1071,13 @@ img {
     color: #8A929D;
 
     font-family: var(--font-body);
-
     font-size: 11px;
 }
 
 .footer-bottom-links a {
     color: inherit;
 
-    text-decoration: none;
-
-    transition: color 180ms ease;
+    transition: color var(--transition);
 }
 
 .footer-bottom-links a:hover {
@@ -1299,28 +1089,188 @@ img {
    RESPONSIVE
    ========================================================= */
 
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
+
+    .navigation-links {
+        gap: 22px;
+    }
+
+    .nav-link {
+        font-size: 16px;
+    }
+
+    .login-button {
+        padding: 0 22px;
+        font-size: 16px;
+    }
+
+    .universities-grid {
+        gap: 20px;
+    }
+
+    .university-card {
+        width: calc(100% - 398px);
+        flex-basis: calc(100% - 398px);
+    }
+
+    .coming-soon-card {
+        width: 378px;
+        flex-basis: 378px;
+    }
+}
+
+
+@media (max-width: 850px) {
+
+    .universities-grid {
+        height: auto;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        gap: 24px;
+    }
+
+    .university-card,
+    .coming-soon-card {
+        width: 100%;
+        max-width: 780px;
+
+        flex-basis: auto;
+    }
+
+    .university-card {
+        order: 1;
+    }
+
+    .coming-soon-card {
+        order: 2;
+    }
+
+    .coming-soon-card {
+        height: 300px;
+        min-height: 300px;
+    }
 
     .footer-container {
         grid-template-columns: 1.5fr 1fr 1fr;
-
         gap: 40px;
     }
 
     .footer-brand {
         grid-column: 1 / -1;
-
         max-width: 500px;
+    }
+}
+
+
+@media (max-width: 800px) {
+
+    .top-navigation {
+        width: calc(100% - 32px);
+        padding: 0 18px;
+    }
+
+    .navigation-links {
+        display: none;
+    }
+
+    .logo img {
+        height: 44px;
+    }
+
+    .login-button {
+        height: 44px;
+        padding: 0 22px;
+        font-size: 15px;
+    }
+
+    .page-content {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    .page-title-banner {
+        height: auto;
+    }
+
+    .page-title,
+    .page-description {
+        width: 100%;
+    }
+
+    .university-card {
+        height: auto;
+
+        flex-direction: column-reverse;
+    }
+
+    .university-image {
+        width: 100%;
+        height: 280px;
+
+        flex-basis: 280px;
+    }
+
+    .university-info {
+        width: 100%;
+        height: auto;
+
+        min-height: 398px;
+    }
+
+    .site-footer {
+        margin-top: 60px;
+
+        border-radius: 24px 24px 0 0;
     }
 }
 
 
 @media (max-width: 600px) {
 
-    .site-footer {
-        margin-top: 60px;
+    .main-content {
+        padding-top: 104px;
+    }
 
-        border-radius: 24px 24px 0 0;
+    .page-content {
+        padding: 0 16px 60px;
+
+        gap: 32px;
+    }
+
+    .page-badge {
+        width: auto;
+    }
+
+    .page-title {
+        font-size: 15px;
+    }
+
+    .page-description {
+        font-size: 14px;
+        line-height: 22px;
+    }
+
+    .university-info {
+        padding: 24px;
+    }
+
+    .university-title {
+        font-size: 21px;
+        line-height: 29px;
+    }
+
+    .detail-text,
+    .university-description,
+    .coming-soon-content p {
+        font-size: 14px;
+        line-height: 23px;
+    }
+
+    .coming-soon-card {
+        padding: 40px 24px;
     }
 
     .footer-container {
@@ -1361,5 +1311,10 @@ img {
         justify-content: center;
 
         text-align: center;
+    }
+
+    .footer-bottom-links {
+        flex-wrap: wrap;
+        justify-content: center;
     }
 }
