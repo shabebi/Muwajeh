@@ -1,0 +1,492 @@
+const express = require("express");
+const router = express.Router();
+const pool = require("../config/db");
+const { requireAuth } = require("../middleware/auth");
+
+// GET /api/assessments/questions
+// Public endpoint: returns the active assessment questions.
+router.get("/questions", async (req, res) => {
+    try {
+        const result = await pool.query(`
+            SELECT
+                q.id,
+                q.question_number,
+                q.question_text_en,
+                q.question_text_ar,
+                q.holland_type_id,
+                h.code AS holland_code
+            FROM questions q
+            JOIN holland_types h ON h.id = q.holland_type_id
+            WHERE q.is_active = true
+            ORDER BY q.question_number
+        `);
+
+        res.json({
+            success: true,
+            data: result.rows
+        });
+    } catch (error) {
+        console.error("Error fetching assessment questions:", error);
+        res.status(500).json({
+            success: false,
+            message: "Failed to fetch assessment questions"
+        });
+    }
+});
+
+// POST /api/assessments/start
+router.post("/start", requireAuth, async (req, res) => {
+    try {
+        const result = await pool.query(`
+            INSERT INTO assessment_attempts (user_id, status, started_at)
+            VALUES ($1, 'in_progress', NOW())
+            RETURNING id, user_id, status, started_at
+        `, [req.user.userId]);
+
+        res.status(201).json({
+            success: true,
+            data: result.rows[0]
+        });
+    } catch (error) {
+        console.error("Error starting assessment:", error);
+        res.status(500).json({
+            success: false,
+            message: "Failed to start assessment"
+        });
+    }
+});
+
+// GET /api/assessments/:attemptId
+router.get("/:attemptId", requireAuth, async (req, res) => {
+    const attemptId = Number(req.params.attemptId);
+
+    if (!Number.isInteger(attemptId)) {
+        return res.status(400).json({
+            success: false,
+            message: "Invalid attempt ID"
+        });
+    }
+
+    try {
+        const attempt = await pool.query(`
+            SELECT
+                id,
+                user_id,
+                status,
+                started_at,
+                completed_at
+            FROM assessment_attempts
+            WHERE id = $1
+              AND user_id = $2
+        `, [attemptId, req.user.userId]);
+
+        if (attempt.rows.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: "Assessment attempt not found"
+            });
+        }
+
+        const answers = await pool.query(`
+            SELECT
+                aa.id,
+                aa.question_id,
+                aa.answer_value
+            FROM assessment_answers aa
+            JOIN assessment_attempts at
+                ON at.id = aa.attempt_id
+            WHERE aa.attempt_id = $1
+              AND at.user_id = $2
+            ORDER BY aa.question_id
+        `, [attemptId, req.user.userId]);
+
+        res.json({
+            success: true,
+            data: {
+                attempt: attempt.rows[0],
+                answers: answers.rows
+            }
+        });
+    } catch (error) {
+        console.error("Error fetching assessment:", error);
+        res.status(500).json({
+            success: false,
+            message: "Failed to fetch assessment"
+        });
+    }
+});
+
+// POST /api/assessments/:attemptId/answers
+router.post("/:attemptId/answers", requireAuth, async (req, res) => {
+    const attemptId = Number(req.params.attemptId);
+    const { questionId, answerValue } = req.body;
+
+    if (!Number.isInteger(attemptId) || !Number.isInteger(Number(questionId))) {
+        return res.status(400).json({
+            success: false,
+            message: "Invalid attempt ID or question ID"
+        });
+    }
+
+    const numericQuestionId = Number(questionId);
+    const numericAnswerValue = Number(answerValue);
+
+    if (!Number.isInteger(numericAnswerValue) || numericAnswerValue < 1 || numericAnswerValue > 5) {
+        return res.status(400).json({
+            success: false,
+            message: "answerValue must be an integer from 1 to 5"
+        });
+    }
+
+    const client = await pool.connect();
+
+    try {
+        await client.query("BEGIN");
+
+        const attempt = await client.query(`
+            SELECT id, status
+            FROM assessment_attempts
+            WHERE id = $1
+              AND user_id = $2
+            FOR UPDATE
+        `, [attemptId, req.user.userId]);
+
+        if (attempt.rows.length === 0) {
+            await client.query("ROLLBACK");
+            return res.status(404).json({
+                success: false,
+                message: "Assessment attempt not found"
+            });
+        }
+
+        if (attempt.rows[0].status !== "in_progress") {
+            await client.query("ROLLBACK");
+            return res.status(409).json({
+                success: false,
+                message: "This assessment is no longer in progress"
+            });
+        }
+
+        const question = await client.query(`
+            SELECT id
+            FROM questions
+            WHERE id = $1
+              AND is_active = true
+        `, [numericQuestionId]);
+
+        if (question.rows.length === 0) {
+            await client.query("ROLLBACK");
+            return res.status(404).json({
+                success: false,
+                message: "Question not found"
+            });
+        }
+
+        const result = await client.query(`
+            INSERT INTO assessment_answers (attempt_id, question_id, answer_value)
+            VALUES ($1, $2, $3)
+            ON CONFLICT (attempt_id, question_id)
+            DO UPDATE SET answer_value = EXCLUDED.answer_value
+            RETURNING id, attempt_id, question_id, answer_value
+        `, [attemptId, numericQuestionId, numericAnswerValue]);
+
+        await client.query("COMMIT");
+
+        res.status(200).json({
+            success: true,
+            data: result.rows[0]
+        });
+    } catch (error) {
+        await client.query("ROLLBACK");
+        console.error("Error saving assessment answer:", error);
+
+        res.status(500).json({
+            success: false,
+            message: "Failed to save answer"
+        });
+    } finally {
+        client.release();
+    }
+});
+
+// POST /api/assessments/:attemptId/submit
+router.post("/:attemptId/submit", requireAuth, async (req, res) => {
+    const attemptId = Number(req.params.attemptId);
+
+    if (!Number.isInteger(attemptId)) {
+        return res.status(400).json({
+            success: false,
+            message: "Invalid attempt ID"
+        });
+    }
+
+    const client = await pool.connect();
+
+    try {
+        await client.query("BEGIN");
+
+        const attempt = await client.query(`
+            SELECT id, status
+            FROM assessment_attempts
+            WHERE id = $1
+              AND user_id = $2
+            FOR UPDATE
+        `, [attemptId, req.user.userId]);
+
+        if (attempt.rows.length === 0) {
+            await client.query("ROLLBACK");
+            return res.status(404).json({
+                success: false,
+                message: "Assessment attempt not found"
+            });
+        }
+
+        if (attempt.rows[0].status !== "in_progress") {
+            await client.query("ROLLBACK");
+            return res.status(409).json({
+                success: false,
+                message: "This assessment has already been submitted"
+            });
+        }
+
+        // Calculate the user's score for each Holland type.
+        const hollandScores = await client.query(`
+            SELECT
+                h.id AS holland_type_id,
+                h.code,
+                COALESCE(SUM(aa.answer_value), 0) AS total_score
+            FROM holland_types h
+            LEFT JOIN questions q
+                ON q.holland_type_id = h.id
+               AND q.is_active = true
+            LEFT JOIN assessment_answers aa
+                ON aa.question_id = q.id
+               AND aa.attempt_id = $1
+            GROUP BY h.id, h.code
+            ORDER BY h.id
+        `, [attemptId]);
+
+        // Compare the user's Holland scores against every active major.
+        // Compatibility is calculated as a percentage based on the
+        // maximum possible difference across the six Holland types.
+        const majors = await client.query(`
+            SELECT
+                m.id AS major_id,
+                m.name_en,
+                m.name_ar
+            FROM majors m
+            JOIN faculties f ON f.id = m.faculty_id
+            JOIN universities u ON u.id = f.university_id
+            WHERE m.is_active = true
+              AND f.is_active = true
+              AND u.is_active = true
+            ORDER BY m.id
+        `);
+
+        if (majors.rows.length === 0) {
+            await client.query("ROLLBACK");
+            return res.status(500).json({
+                success: false,
+                message: "No active majors are available for assessment results"
+            });
+        }
+
+        const userScores = {};
+        for (const row of hollandScores.rows) {
+            userScores[row.holland_type_id] = Number(row.total_score);
+        }
+
+        const majorScores = await client.query(`
+            SELECT
+                major_id,
+                holland_type_id,
+                score
+            FROM major_holland_scores
+            ORDER BY major_id, holland_type_id
+        `);
+
+        const scoresByMajor = {};
+
+        for (const row of majorScores.rows) {
+            if (!scoresByMajor[row.major_id]) {
+                scoresByMajor[row.major_id] = {};
+            }
+
+            scoresByMajor[row.major_id][row.holland_type_id] = Number(row.score);
+        }
+
+        // Determine the maximum question total for each Holland type.
+        const maxScoresResult = await client.query(`
+            SELECT
+                holland_type_id,
+                COUNT(*) * 5 AS max_score
+            FROM questions
+            WHERE is_active = true
+            GROUP BY holland_type_id
+        `);
+
+        const maxScores = {};
+        for (const row of maxScoresResult.rows) {
+            maxScores[row.holland_type_id] = Number(row.max_score);
+        }
+
+        const calculatedResults = majors.rows.map((major) => {
+            const majorHolland = scoresByMajor[major.major_id] || {};
+
+            let totalDifference = 0;
+            let totalMaximumDifference = 0;
+
+            for (const typeId of Object.keys(maxScores)) {
+                const id = Number(typeId);
+                const userScore = userScores[id] || 0;
+                const majorScore = majorHolland[id] || 0;
+                const maxScore = maxScores[id];
+
+                totalDifference += Math.abs(userScore - majorScore);
+                totalMaximumDifference += maxScore;
+            }
+
+            let compatibilityScore = 0;
+
+            if (totalMaximumDifference > 0) {
+                compatibilityScore =
+                    (1 - totalDifference / totalMaximumDifference) * 100;
+            }
+
+            compatibilityScore = Math.max(
+                0,
+                Math.min(100, compatibilityScore)
+            );
+
+            return {
+                major_id: major.major_id,
+                name_en: major.name_en,
+                name_ar: major.name_ar,
+                compatibility_score: Number(compatibilityScore.toFixed(2))
+            };
+        });
+
+        calculatedResults.sort(
+            (a, b) => b.compatibility_score - a.compatibility_score
+        );
+
+        // Keep the top 10 recommendations.
+        const topResults = calculatedResults.slice(0, 10);
+
+        await client.query(`
+            UPDATE assessment_attempts
+            SET status = 'completed',
+                completed_at = NOW()
+            WHERE id = $1
+        `, [attemptId]);
+
+        for (let i = 0; i < topResults.length; i++) {
+            const result = topResults[i];
+
+            await client.query(`
+                INSERT INTO assessment_results
+                    (attempt_id, major_id, compatibility_score, rank, created_at)
+                VALUES
+                    ($1, $2, $3, $4, NOW())
+            `, [
+                attemptId,
+                result.major_id,
+                result.compatibility_score,
+                i + 1
+            ]);
+        }
+
+        await client.query("COMMIT");
+
+        res.json({
+            success: true,
+            data: {
+                attemptId,
+                results: topResults.map((result, index) => ({
+                    rank: index + 1,
+                    majorId: result.major_id,
+                    nameEn: result.name_en,
+                    nameAr: result.name_ar,
+                    compatibilityScore: result.compatibility_score
+                }))
+            }
+        });
+    } catch (error) {
+        await client.query("ROLLBACK");
+        console.error("Error submitting assessment:", error);
+
+        res.status(500).json({
+            success: false,
+            message: "Failed to submit assessment"
+        });
+    } finally {
+        client.release();
+    }
+});
+
+// GET /api/assessments/:attemptId/results
+router.get("/:attemptId/results", requireAuth, async (req, res) => {
+    const attemptId = Number(req.params.attemptId);
+
+    if (!Number.isInteger(attemptId)) {
+        return res.status(400).json({
+            success: false,
+            message: "Invalid attempt ID"
+        });
+    }
+
+    try {
+        const result = await pool.query(`
+            SELECT
+                ar.id,
+                ar.attempt_id,
+                ar.major_id,
+                ar.compatibility_score,
+                ar.rank,
+                ar.created_at,
+                m.name_en,
+                m.name_ar,
+                m.description_en,
+                m.description_ar,
+                m.duration_years,
+                m.requirements_en,
+                m.requirements_ar,
+                m.skills_en,
+                m.skills_ar,
+                m.career_opportunities_en,
+                m.career_opportunities_ar,
+                m.tuition_fee,
+                f.id AS faculty_id,
+                f.name_en AS faculty_name_en,
+                f.name_ar AS faculty_name_ar,
+                u.id AS university_id,
+                u.name_en AS university_name_en,
+                u.name_ar AS university_name_ar
+            FROM assessment_results ar
+            JOIN assessment_attempts a
+                ON a.id = ar.attempt_id
+            JOIN majors m
+                ON m.id = ar.major_id
+            JOIN faculties f
+                ON f.id = m.faculty_id
+            JOIN universities u
+                ON u.id = f.university_id
+            WHERE ar.attempt_id = $1
+              AND a.user_id = $2
+            ORDER BY ar.rank
+        `, [attemptId, req.user.userId]);
+
+        res.json({
+            success: true,
+            data: result.rows
+        });
+    } catch (error) {
+        console.error("Error fetching assessment results:", error);
+        res.status(500).json({
+            success: false,
+            message: "Failed to fetch assessment results"
+        });
+    }
+});
+
+module.exports = router;

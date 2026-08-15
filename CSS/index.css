@@ -541,7 +541,7 @@ body {
     width: calc(100% - 48px);
     max-width: 1184px;
 
-    height: 413px;
+    height: 440px;
 
     margin: 0 auto;
 
@@ -567,9 +567,9 @@ body {
     position: relative;
 
     width: calc((100% - 32px) / 2);
-    height: 312px;
+    height: 400px;
 
-    padding: 24px 28px;
+    padding: 28px 32px;
 
     display: flex;
     flex-direction: column;
@@ -580,7 +580,7 @@ body {
 
     border: 1px solid #E1E5EA;
 
-    border-radius: 16px;
+    border-radius: 18px;
 
     box-shadow:
         0px 8px 24px rgba(10, 29, 56, 0.04);
@@ -596,8 +596,8 @@ body {
    ========================================================= */
 
 .portal-icon {
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
 
     display: flex;
 
@@ -610,7 +610,9 @@ body {
 
     border-radius: 50%;
 
-    font-size: 16px;
+    font-size: 19px;
+
+    align-self: flex-start;
 }
 
 .portal-icon-gold {
@@ -625,7 +627,7 @@ body {
 .portal-content {
     width: 100%;
 
-    margin-top: 12px;
+    margin-top: 16px;
 
     text-align: right;
 }
@@ -637,27 +639,27 @@ body {
 
     font-family: var(--font-headline);
 
-    font-size: 26px;
+    font-size: 29px;
     font-weight: 700;
 
-    line-height: 1.35;
+    line-height: 1.4;
 
     text-align: right;
 }
 
 .portal-description {
-    max-width: 430px;
+    max-width: 470px;
 
-    margin: 20px 0 0;
+    margin: 22px 0 0;
 
     color: #5E636B;
 
     font-family: var(--font-body);
 
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 400;
 
-    line-height: 1.8;
+    line-height: 1.9;
 
     text-align: right;
 }
@@ -673,11 +675,11 @@ body {
     align-items: center;
     justify-content: center;
 
-    margin-top: 12px;
+    margin-top: 14px;
 
-    padding: 3px 10px;
+    padding: 4px 12px;
 
-    min-height: 21px;
+    min-height: 24px;
 
     background: #EEF0F2;
 
@@ -687,8 +689,8 @@ body {
 
     font-family: var(--font-body);
 
-    font-size: 9px;
-    font-weight: 500;
+    font-size: 13px;
+    font-weight: 600;
 
     white-space: nowrap;
 }
@@ -701,28 +703,30 @@ body {
 .portal-button {
     position: absolute;
 
-    bottom: 24px;
+    bottom: 28px;
 
     display: flex;
 
     align-items: center;
     justify-content: center;
 
-    gap: 8px;
+    gap: 9px;
 
-    min-width: 132px;
-    height: 34px;
+    min-width: 148px;
+    height: 40px;
 
-    padding: 0 16px;
+    padding: 0 18px;
 
     border-radius: 9999px;
 
     font-family: var(--font-body);
 
-    font-size: 11px;
+    font-size: 14px;
     font-weight: 600;
 
     text-decoration: none;
+
+    direction: rtl;
 
     transition:
         transform 180ms ease,
@@ -736,10 +740,12 @@ body {
 }
 
 
-/* University card button */
+/* =========================================================
+   UNIVERSITY CARD BUTTON
+   ========================================================= */
 
 .portal-button-primary {
-    right: 24px;
+    right: 28px;
 
     background: var(--color-primary);
 
@@ -747,16 +753,17 @@ body {
 }
 
 
-/* Assessment card button */
+/* =========================================================
+   ASSESSMENT CARD BUTTON
+   ========================================================= */
 
 .portal-button-gold {
-    right: 24px;
+    right: 28px;
 
     background: var(--color-secondary);
 
     color: #FFFFFF;
 }
-
 
 /* =========================================================
    CENTER DECORATION
