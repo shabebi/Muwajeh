@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,13 +11,12 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Tajawal:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Tajawal:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <!-- Font Awesome Free -->
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
     <link rel="stylesheet" href="../CSS/universities.css">
 </head>
@@ -35,11 +35,53 @@
             <a href="index.html" class="nav-link">الرئيسية</a>
             <a href="test.html" class="nav-link">اختبار التوجيه</a>
             <a href="universities.html" class="nav-link active">الجامعات</a>
-            <a href="#" class="nav-link">التخصصات</a>
-            <a href="#" class="nav-link">عن المنصة</a>
+            <a href="majors.html" class="nav-link">التخصصات</a>
+            <a href="about.html" class="nav-link">عن المنصة</a>
         </nav>
 
-        <a href="#" class="login-button">تسجيل الدخول</a>
+        <div class="auth-header-area">
+            <a href="login.html" class="login-button" id="loginButton">
+                تسجيل الدخول
+            </a>
+
+            <button type="button" class="profile-button" id="profileButton" hidden>
+                <i class="fa-solid fa-user"></i>
+            </button>
+        </div>
+
+        <!-- ACCOUNT POPUP -->
+        <div class="account-overlay" id="accountOverlay" hidden>
+            <div class="account-popup">
+
+                <button type="button" class="account-close" id="accountClose">
+                    ×
+                </button>
+
+                <div class="account-avatar">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+
+                <h2>حسابي</h2>
+
+                <div class="account-info">
+                    <div class="account-info-row">
+                        <span>الاسم</span>
+                        <strong id="accountName">---</strong>
+                    </div>
+
+                    <div class="account-info-row">
+                        <span>البريد الإلكتروني</span>
+                        <strong id="accountEmail">---</strong>
+                    </div>
+                </div>
+
+                <button type="button" class="logout-button" id="logoutButton">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    تسجيل الخروج
+                </button>
+
+            </div>
+        </div>
 
     </header>
 
@@ -122,10 +164,7 @@
                     </div>
 
                     <div class="university-image">
-                        <img
-                            src="../University.jpg"
-                            alt="جامعة حضرموت"
-                        >
+                        <img src="../University.jpg" alt="جامعة حضرموت">
                     </div>
 
                 </article>
@@ -163,153 +202,154 @@
         </section>
 
 
-<!-- ================= FOOTER ================= -->
+        <!-- ================= FOOTER ================= -->
 
-    <footer class="site-footer">
+        <footer class="site-footer">
 
-        <div class="footer-container">
+            <div class="footer-container">
 
-            <!-- Brand -->
-            <div class="footer-brand">
+                <!-- Brand -->
+                <div class="footer-brand">
 
-                <a href="index.html" class="footer-logo">
-                    <img src="../Logo.png" alt="موّجه">
-                </a>
-
-                <p class="footer-description">
-                    منصتك الذكية لاكتشاف التخصصات والجامعات المناسبة
-                    لك، وبناء مستقبل أكاديمي يتناسب مع ميولك وقدراتك.
-                </p>
-
-            </div>
-
-
-            <!-- Quick Links -->
-            <div class="footer-column">
-
-                <h3 class="footer-title">
-                    روابط سريعة
-                </h3>
-
-                <a href="index.html" class="footer-link">
-                    الرئيسية
-                </a>
-
-                <a href="test.html" class="footer-link">
-                    اختبار التوجيه
-                </a>
-
-                <a href="universities.html" class="footer-link">
-                    الجامعات
-                </a>
-
-                <a href="majors.html" class="footer-link">
-                    التخصصات
-                </a>
-
-                <a href="about.html" class="footer-link">
-                    عن المنصة
-                </a>
-
-            </div>
-
-
-            <!-- Services -->
-            <div class="footer-column">
-
-                <h3 class="footer-title">
-                    خدماتنا
-                </h3>
-
-                <a href="#" class="footer-link">
-                    اختبار تحديد التخصص
-                </a>
-
-                <a href="#" class="footer-link">
-                    استكشاف التخصصات
-                </a>
-
-                <a href="#" class="footer-link">
-                    دليل الجامعات
-                </a>
-
-            </div>
-
-
-            <!-- Contact -->
-            <div class="footer-column footer-contact">
-
-                <h3 class="footer-title">
-                    تواصل معنا
-                </h3>
-
-                <a href="mailto:info@muwajeh.com" class="footer-contact-item">
-                    <span class="footer-icon">
-                        <i class="fa-solid fa-envelope"></i>
-                    </span>
-
-                    <span>info@muwajeh.com</span>
-                </a>
-
-                <a href="#" class="footer-contact-item">
-                    <span class="footer-icon">
-                        <i class="fa-solid fa-location-dot"></i>
-                    </span>
-
-                    <span>المملكة العربية السعودية</span>
-                </a>
-
-                <div class="footer-socials">
-
-                    <a href="#" aria-label="X">
-                        <i class="fa-brands fa-x-twitter"></i>
+                    <a href="index.html" class="footer-logo">
+                        <img src="../Logo.png" alt="موّجه">
                     </a>
 
-                    <a href="#" aria-label="Instagram">
-                        <i class="fa-brands fa-instagram"></i>
+                    <p class="footer-description">
+                        منصتك الذكية لاكتشاف التخصصات والجامعات المناسبة
+                        لك، وبناء مستقبل أكاديمي يتناسب مع ميولك وقدراتك.
+                    </p>
+
+                </div>
+
+
+                <!-- Quick Links -->
+                <div class="footer-column">
+
+                    <h3 class="footer-title">
+                        روابط سريعة
+                    </h3>
+
+                    <a href="index.html" class="footer-link">
+                        الرئيسية
                     </a>
 
-                    <a href="#" aria-label="LinkedIn">
-                        <i class="fa-brands fa-linkedin-in"></i>
+                    <a href="test.html" class="footer-link">
+                        اختبار التوجيه
                     </a>
+
+                    <a href="universities.html" class="footer-link">
+                        الجامعات
+                    </a>
+
+                    <a href="majors.html" class="footer-link">
+                        التخصصات
+                    </a>
+
+                    <a href="about.html" class="footer-link">
+                        عن المنصة
+                    </a>
+
+                </div>
+
+
+                <!-- Services -->
+                <div class="footer-column">
+
+                    <h3 class="footer-title">
+                        خدماتنا
+                    </h3>
+
+                    <a href="#" class="footer-link">
+                        اختبار تحديد التخصص
+                    </a>
+
+                    <a href="#" class="footer-link">
+                        استكشاف التخصصات
+                    </a>
+
+                    <a href="#" class="footer-link">
+                        دليل الجامعات
+                    </a>
+
+                </div>
+
+
+                <!-- Contact -->
+                <div class="footer-column footer-contact">
+
+                    <h3 class="footer-title">
+                        تواصل معنا
+                    </h3>
+
+                    <a href="mailto:info@muwajeh.com" class="footer-contact-item">
+                        <span class="footer-icon">
+                            <i class="fa-solid fa-envelope"></i>
+                        </span>
+
+                        <span>info@muwajeh.com</span>
+                    </a>
+
+                    <a href="#" class="footer-contact-item">
+                        <span class="footer-icon">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </span>
+
+                        <span>المملكة العربية السعودية</span>
+                    </a>
+
+                    <div class="footer-socials">
+
+                        <a href="#" aria-label="X">
+                            <i class="fa-brands fa-x-twitter"></i>
+                        </a>
+
+                        <a href="#" aria-label="Instagram">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+
+                        <a href="#" aria-label="LinkedIn">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+
+                    </div>
 
                 </div>
 
             </div>
 
-        </div>
 
+            <!-- Bottom -->
+            <div class="footer-bottom">
 
-        <!-- Bottom -->
-        <div class="footer-bottom">
+                <div class="footer-bottom-container">
 
-            <div class="footer-bottom-container">
+                    <p>
+                        © 2026 موّجه. جميع الحقوق محفوظة.
+                    </p>
 
-                <p>
-                    © 2026 موّجه. جميع الحقوق محفوظة.
-                </p>
+                    <div class="footer-bottom-links">
 
-                <div class="footer-bottom-links">
+                        <a href="#">
+                            سياسة الخصوصية
+                        </a>
 
-                    <a href="#">
-                        سياسة الخصوصية
-                    </a>
+                        <span>•</span>
 
-                    <span>•</span>
+                        <a href="#">
+                            شروط الاستخدام
+                        </a>
 
-                    <a href="#">
-                        شروط الاستخدام
-                    </a>
+                    </div>
 
                 </div>
 
             </div>
 
-        </div>
-
-    </footer>
+        </footer>
 
     </main>
-
+    <script src="../JS/header-auth.js"></script>
 </body>
+
 </html>

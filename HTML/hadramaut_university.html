@@ -52,9 +52,49 @@
 
         </nav>
 
-        <a href="login.html" class="login-button">
-            تسجيل الدخول
-        </a>
+        <div class="auth-header-area">
+            <a href="login.html" class="login-button" id="loginButton">
+                تسجيل الدخول
+            </a>
+
+            <button type="button" class="profile-button" id="profileButton" hidden>
+                <i class="fa-solid fa-user"></i>
+            </button>
+        </div>
+
+        <!-- ACCOUNT POPUP -->
+        <div class="account-overlay" id="accountOverlay" hidden>
+            <div class="account-popup">
+
+                <button type="button" class="account-close" id="accountClose">
+                    ×
+                </button>
+
+                <div class="account-avatar">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+
+                <h2>حسابي</h2>
+
+                <div class="account-info">
+                    <div class="account-info-row">
+                        <span>الاسم</span>
+                        <strong id="accountName">---</strong>
+                    </div>
+
+                    <div class="account-info-row">
+                        <span>البريد الإلكتروني</span>
+                        <strong id="accountEmail">---</strong>
+                    </div>
+                </div>
+
+                <button type="button" class="logout-button" id="logoutButton">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    تسجيل الخروج
+                </button>
+
+            </div>
+        </div>
 
     </header>
 
@@ -536,6 +576,7 @@
 
 
     <script src="../JS/university.js"></script>
+    <script src="../JS/header-auth.js"></script>
 </body>
 
 </html>
