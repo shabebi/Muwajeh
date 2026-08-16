@@ -10,14 +10,12 @@ router.get("/", async (req, res) => {
             SELECT
                 id,
                 university_id,
-                name_en,
                 name_ar,
-                description_en,
                 description_ar,
                 is_active
             FROM faculties
             WHERE is_active = true
-            ORDER BY name_en
+            ORDER BY name_ar
         `);
 
         res.json(result.rows);
@@ -32,7 +30,6 @@ router.get("/", async (req, res) => {
     }
 });
 
-
 // GET faculties belonging to a specific university
 router.get("/university/:universityId", async (req, res) => {
     try {
@@ -42,15 +39,13 @@ router.get("/university/:universityId", async (req, res) => {
             SELECT
                 id,
                 university_id,
-                name_en,
                 name_ar,
-                description_en,
                 description_ar,
                 is_active
             FROM faculties
             WHERE university_id = $1
               AND is_active = true
-            ORDER BY name_en
+            ORDER BY name_ar
         `, [universityId]);
 
         res.json(result.rows);

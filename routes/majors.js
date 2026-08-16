@@ -9,16 +9,11 @@ router.get("/", async (req, res) => {
             SELECT
                 m.id,
                 m.faculty_id,
-                m.name_en,
                 m.name_ar,
-                m.description_en,
                 m.description_ar,
                 m.duration_years,
-                m.requirements_en,
                 m.requirements_ar,
-                m.skills_en,
                 m.skills_ar,
-                m.career_opportunities_en,
                 m.career_opportunities_ar,
                 m.tuition_fee,
                 m.is_active
@@ -28,7 +23,7 @@ router.get("/", async (req, res) => {
             WHERE m.is_active = true
               AND f.is_active = true
               AND u.is_active = true
-            ORDER BY m.name_en
+            ORDER BY m.name_ar
         `);
 
         res.json({
@@ -60,23 +55,18 @@ router.get("/faculty/:facultyId", async (req, res) => {
             SELECT
                 id,
                 faculty_id,
-                name_en,
                 name_ar,
-                description_en,
                 description_ar,
                 duration_years,
-                requirements_en,
                 requirements_ar,
-                skills_en,
                 skills_ar,
-                career_opportunities_en,
                 career_opportunities_ar,
                 tuition_fee,
                 is_active
             FROM majors
             WHERE faculty_id = $1
               AND is_active = true
-            ORDER BY name_en
+            ORDER BY name_ar
         `, [facultyId]);
 
         res.json({
@@ -108,23 +98,16 @@ router.get("/:id", async (req, res) => {
             SELECT
                 m.id,
                 m.faculty_id,
-                m.name_en,
                 m.name_ar,
-                m.description_en,
                 m.description_ar,
                 m.duration_years,
-                m.requirements_en,
                 m.requirements_ar,
-                m.skills_en,
                 m.skills_ar,
-                m.career_opportunities_en,
                 m.career_opportunities_ar,
                 m.tuition_fee,
                 m.is_active,
-                f.name_en AS faculty_name_en,
                 f.name_ar AS faculty_name_ar,
                 u.id AS university_id,
-                u.name_en AS university_name_en,
                 u.name_ar AS university_name_ar
             FROM majors m
             JOIN faculties f ON f.id = m.faculty_id

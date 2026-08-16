@@ -9,17 +9,14 @@ router.get("/", async (req, res) => {
         const result = await pool.query(`
             SELECT
                 id,
-                name_en,
                 name_ar,
-                description_en,
                 description_ar,
-                location_en,
                 location_ar,
                 website_url,
                 logo_url
             FROM universities
             WHERE is_active = true
-            ORDER BY name_en
+            ORDER BY name_ar
         `);
 
         res.json(result.rows);

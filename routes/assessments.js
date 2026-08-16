@@ -17,7 +17,6 @@ router.get("/questions", async (req, res) => {
             SELECT
                 q.id,
                 q.question_number,
-                q.question_text_en,
                 q.question_text_ar,
                 q.holland_type_id,
                 h.code AS holland_code
@@ -105,7 +104,6 @@ router.post("/recommendations", async (req, res) => {
         const majorsResult = await pool.query(`
             SELECT
                 m.id AS major_id,
-                m.name_en,
                 m.name_ar
             FROM majors m
             JOIN faculties f
@@ -309,9 +307,6 @@ router.post("/recommendations", async (req, res) => {
 
                     majorId:
                         major.major_id,
-
-                    nameEn:
-                        major.name_en,
 
                     nameAr:
                         major.name_ar,
@@ -901,7 +896,6 @@ router.post(
 
                     SELECT
                         m.id AS major_id,
-                        m.name_en,
                         m.name_ar
 
                     FROM majors m
@@ -1126,9 +1120,6 @@ router.post(
                         major_id:
                             major.major_id,
 
-                        name_en:
-                            major.name_en,
-
                         name_ar:
                             major.name_ar,
 
@@ -1240,9 +1231,6 @@ router.post(
                                 majorId:
                                     result.major_id,
 
-                                nameEn:
-                                    result.name_en,
-
                                 nameAr:
                                     result.name_ar,
 
@@ -1320,25 +1308,18 @@ router.get(
                         ar.rank,
                         ar.created_at,
 
-                        m.name_en,
                         m.name_ar,
-                        m.description_en,
                         m.description_ar,
                         m.duration_years,
-                        m.requirements_en,
                         m.requirements_ar,
-                        m.skills_en,
                         m.skills_ar,
-                        m.career_opportunities_en,
                         m.career_opportunities_ar,
                         m.tuition_fee,
 
                         f.id AS faculty_id,
-                        f.name_en AS faculty_name_en,
                         f.name_ar AS faculty_name_ar,
 
                         u.id AS university_id,
-                        u.name_en AS university_name_en,
                         u.name_ar AS university_name_ar
 
                     FROM assessment_results ar

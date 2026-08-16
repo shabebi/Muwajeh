@@ -94,8 +94,7 @@ function renderQuestion() {
 
   const question = questions[currentQuestion];
 
-  questionText.textContent =
-    question.question_text_ar || question.question_text_en;
+  questionText.textContent = question.question_text_ar;
 
   categoryPill.textContent = "الأسئلة";
 

@@ -9,11 +9,9 @@ router.get("/", async (req, res) => {
             SELECT
                 q.id,
                 q.question_number,
-                q.question_text_en,
                 q.question_text_ar,
                 q.holland_type_id,
                 h.code AS holland_code,
-                h.name_en AS holland_name_en,
                 h.name_ar AS holland_name_ar
             FROM questions q
             JOIN holland_types h ON h.id = q.holland_type_id
@@ -50,11 +48,9 @@ router.get("/:id", async (req, res) => {
             SELECT
                 q.id,
                 q.question_number,
-                q.question_text_en,
                 q.question_text_ar,
                 q.holland_type_id,
                 h.code AS holland_code,
-                h.name_en AS holland_name_en,
                 h.name_ar AS holland_name_ar
             FROM questions q
             JOIN holland_types h ON h.id = q.holland_type_id
