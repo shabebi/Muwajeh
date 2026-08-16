@@ -34,6 +34,199 @@ router.get("/questions", async (req, res) => {
     }
 });
 
+// POST /api/assessments/recommendations
+// Public/local endpoint: calculates recommendations from answers
+// without creating an assessment_attempt or saving anything.
+router.post("/recommendations", async (req, res) => {
+    const answers = req.body.answers;
+
+    if (!answers || typeof answers !== "object" || Array.isArray(answers)) {
+        return res.status(400).json({
+            success: false,
+            message: "answers must be an object keyed by question ID"
+        });
+    }
+
+    try {
+        const questionsResult = await pool.query(`
+            SELECT
+                q.id,
+                q.holland_type_id
+            FROM questions q
+            JOIN holland_types h
+                ON h.id = q.holland_type_id
+            WHERE q.is_active = true
+        `);
+
+        const majorsResult = await pool.query(`
+            SELECT
+                m.id AS major_id,
+                m.name_en,
+                m.name_ar
+            FROM majors m
+            JOIN faculties f
+                ON f.id = m.faculty_id
+            JOIN universities u
+                ON u.id = f.university_id
+            WHERE m.is_active = true
+              AND f.is_active = true
+              AND u.is_active = true
+        `);
+
+        const majorScoresResult = await pool.query(`
+            SELECT
+                major_id,
+                holland_type_id,
+                score
+            FROM major_holland_scores
+            ORDER BY major_id, holland_type_id
+        `);
+
+        const maxScoresResult = await pool.query(`
+            SELECT
+                holland_type_id,
+                COUNT(*) * 5 AS max_score
+            FROM questions
+            WHERE is_active = true
+            GROUP BY holland_type_id
+        `);
+
+        // Calculate the user's total for each Holland type.
+        const userScores = {};
+
+        for (const question of questionsResult.rows) {
+            const answer = Number(answers[String(question.id)]);
+
+            if (!Number.isInteger(answer) || answer < 1 || answer > 5) {
+                continue;
+            }
+
+            const typeId = question.holland_type_id;
+
+            userScores[typeId] =
+                (userScores[typeId] || 0) + answer;
+        }
+
+        // Maximum possible score for each Holland type.
+        const maxScores = {};
+
+        for (const row of maxScoresResult.rows) {
+            maxScores[row.holland_type_id] =
+                Number(row.max_score);
+        }
+
+        // Organize each major's RIASEC profile.
+        const scoresByMajor = {};
+
+        for (const row of majorScoresResult.rows) {
+
+            if (!scoresByMajor[row.major_id]) {
+                scoresByMajor[row.major_id] = {};
+            }
+
+            scoresByMajor[row.major_id][row.holland_type_id] =
+                Number(row.score);
+        }
+
+        /*
+         * Compatibility:
+         *
+         * For each Holland type:
+         *   difference = |user score - major score|
+         *
+         * The total difference is converted to a percentage.
+         *
+         * This is the same calculation currently used by the
+         * authenticated assessment submission route, but this
+         * endpoint does NOT save an attempt or results.
+         */
+        const calculatedResults =
+            majorsResult.rows.map((major) => {
+
+                const majorHolland =
+                    scoresByMajor[major.major_id] || {};
+
+                let totalDifference = 0;
+                let totalMaximumDifference = 0;
+
+                for (const typeId of Object.keys(maxScores)) {
+
+                    const id = Number(typeId);
+
+                    const userScore =
+                        userScores[id] || 0;
+
+                    const majorScore =
+                        majorHolland[id] || 0;
+
+                    const maxScore =
+                        maxScores[id];
+
+                    totalDifference +=
+                        Math.abs(userScore - majorScore);
+
+                    totalMaximumDifference +=
+                        maxScore;
+                }
+
+                let compatibilityScore = 0;
+
+                if (totalMaximumDifference > 0) {
+
+                    compatibilityScore =
+                        (1 -
+                            totalDifference /
+                            totalMaximumDifference
+                        ) * 100;
+                }
+
+                compatibilityScore =
+                    Math.max(
+                        0,
+                        Math.min(
+                            100,
+                            compatibilityScore
+                        )
+                    );
+
+                return {
+                    majorId: major.major_id,
+                    nameEn: major.name_en,
+                    nameAr: major.name_ar,
+                    compatibilityScore:
+                        Number(
+                            compatibilityScore.toFixed(2)
+                        )
+                };
+            });
+
+        calculatedResults.sort(
+            (a, b) =>
+                b.compatibilityScore -
+                a.compatibilityScore
+        );
+
+        res.json({
+            success: true,
+            data: {
+                results: calculatedResults.slice(0, 6)
+            }
+        });
+
+    } catch (error) {
+
+        console.error(
+            "Error calculating local recommendations:",
+            error
+        );
+
+        res.status(500).json({
+            success: false,
+            message: "Failed to calculate recommendations"
+        });
+    }
+});
+
 // POST /api/assessments/start
 router.post("/start", requireAuth, async (req, res) => {
     try {
