@@ -38,7 +38,10 @@ const progressFill =
 ========================================================= */
 
 function getToken() {
-    return localStorage.getItem("muwajeh_token");
+    return (
+        localStorage.getItem("muwajeh_token") ||
+        sessionStorage.getItem("muwajeh_token")
+    );
 }
 
 

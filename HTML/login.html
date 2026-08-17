@@ -9,106 +9,181 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Tajawal:wght@500;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Tajawal:wght@500;600;700;800&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="../CSS/login.css">
 </head>
 
 <body>
 
-    <header class="top-navigation">
-        <a href="index.html" class="logo" aria-label="موّجه">
-            <span class="logo-mark">م</span>
-            <span class="logo-text">موّجه</span>
-        </a>
-
-        <a href="index.html" class="home-link">الرئيسية</a>
-    </header>
+    <!-- Figma has no header/footer on the auth screen.
+         This small home button is the only navigation element. -->
+    <a href="index.html" class="home-button" aria-label="العودة إلى الصفحة الرئيسية" title="الرئيسية">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3.5 10.8 12 3.7l8.5 7.1v8.1a1.6 1.6 0 0 1-1.6 1.6h-4.4v-5.7H9.5v5.7H5.1a1.6 1.6 0 0 1-1.6-1.6z"
+                fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+        </svg>
+    </a>
 
     <main class="auth-page">
-        <section class="auth-card">
+        <section class="auth-card" id="authCard">
 
-            <div class="auth-header">
-                <div class="auth-icon">
-                    <span>م</span>
-                </div>
-                <h1 id="authTitle">تسجيل الدخول</h1>
-                <p id="authSubtitle">سجّل دخولك للوصول إلى حسابك ونتائجك.</p>
-            </div>
+            <!-- BRANDING PANEL -->
+            <aside class="branding-panel">
+                <div class="branding-content">
 
-            <div class="auth-tabs" role="tablist" aria-label="نوع الحساب">
-                <button type="button" class="auth-tab active" id="loginTab">تسجيل الدخول</button>
-                <button type="button" class="auth-tab" id="signupTab">إنشاء حساب</button>
-            </div>
-
-            <div id="messageBox" class="message-box" hidden></div>
-
-            <!-- LOGIN -->
-            <form id="loginForm" class="auth-form" novalidate>
-
-                <div class="form-group">
-                    <label for="loginEmail">البريد الإلكتروني</label>
-                    <input id="loginEmail" name="email" type="email" autocomplete="email"
-                        placeholder="أدخل بريدك الإلكتروني" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="loginPassword">كلمة المرور</label>
-                    <div class="password-wrapper">
-                        <input id="loginPassword" name="password" type="password" autocomplete="current-password"
-                            placeholder="أدخل كلمة المرور" required>
-                        <button type="button" class="password-toggle" data-target="loginPassword">إظهار</button>
+                    <div class="branding-logo-wrap">
+                        <img src="../LogoIcon.png" alt="موّجه" class="branding-logo">
                     </div>
+
+                    <h2 id="brandingTitle">أول مرة تنضم إلينا؟ 🚀</h2>
+
+                    <p id="brandingDescription">
+                        أنشئ حسابك الجديد الآن وابدأ في استكشاف مسارك الأكاديمي الأنسب معنا.
+                    </p>
+
+                    <button type="button" class="switch-button" id="signupTab">
+                        إنشاء حساب جديد
+                    </button>
                 </div>
 
-                <button type="button" class="forgot-password" id="forgotPasswordButton">
-                    نسيت كلمة المرور؟
-                </button>
+                <div class="branding-glow"></div>
+            </aside>
 
-                <button type="submit" class="submit-button" id="loginSubmit">
-                    تسجيل الدخول
-                </button>
-            </form>
+            <!-- FORM PANEL -->
+            <section class="form-panel">
 
-            <!-- SIGNUP -->
-            <form id="signupForm" class="auth-form" hidden novalidate>
-
-                <div class="form-group">
-                    <label for="signupName">الاسم</label>
-                    <input id="signupName" name="name" type="text" autocomplete="name" placeholder="أدخل اسمك" required>
+                <div class="auth-heading">
+                    <h1 id="authTitle">تسجيل الدخول</h1>
+                    <p id="authSubtitle">مرحباً بك مجدداً! أدخل بياناتك لمتابعة رحلتك</p>
                 </div>
 
-                <div class="form-group">
-                    <label for="signupEmail">البريد الإلكتروني</label>
-                    <input id="signupEmail" name="email" type="email" autocomplete="email"
-                        placeholder="أدخل بريدك الإلكتروني" required>
-                </div>
+                <div id="messageBox" class="message-box" hidden></div>
 
-                <div class="form-group">
-                    <label for="signupPassword">كلمة المرور</label>
-                    <div class="password-wrapper">
-                        <input id="signupPassword" name="password" type="password" autocomplete="new-password"
-                            placeholder="6 أحرف على الأقل" minlength="6" required>
-                        <button type="button" class="password-toggle" data-target="signupPassword">إظهار</button>
+                <!-- LOGIN -->
+                <form id="loginForm" class="auth-form" novalidate>
+
+                    <div class="field">
+                        <div class="input-wrap">
+                            <span class="field-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <rect x="3.5" y="5" width="17" height="14" rx="2.2"></rect>
+                                    <path d="m4.5 7 7.5 5.5L19.5 7"></path>
+                                </svg>
+                            </span>
+                            <input id="loginEmail" name="email" type="email" autocomplete="email"
+                                placeholder="البريد الإلكتروني" required>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="signupConfirmPassword">تأكيد كلمة المرور</label>
-                    <div class="password-wrapper">
-                        <input id="signupConfirmPassword" name="confirmPassword" type="password"
-                            autocomplete="new-password" placeholder="أعد كتابة كلمة المرور" minlength="6" required>
-                        <button type="button" class="password-toggle" data-target="signupConfirmPassword">إظهار</button>
+                    <div class="field">
+                        <div class="input-wrap">
+                            <span class="field-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <rect x="5" y="10" width="14" height="10" rx="2"></rect>
+                                    <path d="M8 10V7.5a4 4 0 0 1 8 0V10"></path>
+                                </svg>
+                            </span>
+                            <input id="loginPassword" name="password" type="password" autocomplete="current-password"
+                                placeholder="كلمة المرور" required>
+                            <button type="button" class="password-toggle" data-target="loginPassword" aria-label="إظهار كلمة المرور">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M2.5 12s3.2-5 9.5-5 9.5 5 9.5 5-3.2 5-9.5 5-9.5-5-9.5-5z"></path>
+                                    <circle cx="12" cy="12" r="2.4"></circle>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
-                </div>
 
-                <button type="submit" class="submit-button" id="signupSubmit">
-                    إنشاء الحساب
-                </button>
-            </form>
+                    <div class="login-actions">
+                        <button type="button" class="forgot-password" id="forgotPasswordButton">
+                            نسيت كلمة المرور؟
+                        </button>
 
+                        <label class="remember-me">
+                            <input type="checkbox" id="rememberMe">
+                            <span>تذكرني</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="submit-button" id="loginSubmit">
+                        تسجيل الدخول
+                    </button>
+                </form>
+
+                <!-- SIGNUP -->
+                <form id="signupForm" class="auth-form signup-form" hidden novalidate>
+
+                    <div class="field">
+                        <div class="input-wrap">
+                            <span class="field-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <circle cx="12" cy="8" r="3.5"></circle>
+                                    <path d="M5 20c.8-3.4 3.1-5.2 7-5.2s6.2 1.8 7 5.2"></path>
+                                </svg>
+                            </span>
+                            <input id="signupName" name="name" type="text" autocomplete="name"
+                                placeholder="الاسم الكامل" required>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="input-wrap">
+                            <span class="field-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <rect x="3.5" y="5" width="17" height="14" rx="2.2"></rect>
+                                    <path d="m4.5 7 7.5 5.5L19.5 7"></path>
+                                </svg>
+                            </span>
+                            <input id="signupEmail" name="email" type="email" autocomplete="email"
+                                placeholder="البريد الإلكتروني" required>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="input-wrap">
+                            <span class="field-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <rect x="5" y="10" width="14" height="10" rx="2"></rect>
+                                    <path d="M8 10V7.5a4 4 0 0 1 8 0V10"></path>
+                                </svg>
+                            </span>
+                            <input id="signupPassword" name="password" type="password" autocomplete="new-password"
+                                placeholder="كلمة المرور" minlength="6" required>
+                            <button type="button" class="password-toggle" data-target="signupPassword" aria-label="إظهار كلمة المرور">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M2.5 12s3.2-5 9.5-5 9.5 5 9.5 5-3.2 5-9.5 5-9.5-5-9.5-5z"></path>
+                                    <circle cx="12" cy="12" r="2.4"></circle>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="input-wrap">
+                            <span class="field-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <rect x="5" y="10" width="14" height="10" rx="2"></rect>
+                                    <path d="M8 10V7.5a4 4 0 0 1 8 0V10"></path>
+                                </svg>
+                            </span>
+                            <input id="signupConfirmPassword" name="confirmPassword" type="password"
+                                autocomplete="new-password" placeholder="تأكيد كلمة المرور" minlength="6" required>
+                            <button type="button" class="password-toggle" data-target="signupConfirmPassword" aria-label="إظهار كلمة المرور">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M2.5 12s3.2-5 9.5-5 9.5 5 9.5 5-3.2 5-9.5 5-9.5-5-9.5-5z"></path>
+                                    <circle cx="12" cy="12" r="2.4"></circle>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-button" id="signupSubmit">
+                        إنشاء الحساب
+                    </button>
+                </form>
+
+            </section>
         </section>
     </main>
 
@@ -116,13 +191,9 @@
     <div class="modal-overlay" id="verificationModal" hidden>
         <div class="modal" role="dialog" aria-modal="true" aria-labelledby="verificationTitle">
             <button type="button" class="modal-close" data-close-modal aria-label="إغلاق">×</button>
-
             <div class="modal-icon">✉</div>
             <h2 id="verificationTitle">تأكيد البريد الإلكتروني</h2>
-            <p id="verificationDescription">
-                أرسلنا رمزاً مكوناً من 6 أرقام إلى بريدك الإلكتروني.
-            </p>
-
+            <p id="verificationDescription">أرسلنا رمزاً مكوناً من 6 أرقام إلى بريدك الإلكتروني.</p>
             <div class="code-inputs" dir="ltr">
                 <input maxlength="1" inputmode="numeric" autocomplete="one-time-code">
                 <input maxlength="1" inputmode="numeric">
@@ -131,15 +202,8 @@
                 <input maxlength="1" inputmode="numeric">
                 <input maxlength="1" inputmode="numeric">
             </div>
-
-            <button type="button" class="submit-button" id="verifyCodeButton">
-                تأكيد الرمز
-            </button>
-
-            <button type="button" class="resend-button" id="resendCodeButton">
-                إعادة إرسال الرمز
-            </button>
-
+            <button type="button" class="submit-button" id="verifyCodeButton">تأكيد الرمز</button>
+            <button type="button" class="resend-button" id="resendCodeButton">إعادة إرسال الرمز</button>
             <div class="modal-message" id="verificationMessage" hidden></div>
         </div>
     </div>
@@ -148,22 +212,16 @@
     <div class="modal-overlay" id="resetModal" hidden>
         <div class="modal" role="dialog" aria-modal="true" aria-labelledby="resetTitle">
             <button type="button" class="modal-close" data-close-modal aria-label="إغلاق">×</button>
-
             <div class="modal-icon">🔐</div>
             <h2 id="resetTitle">استعادة كلمة المرور</h2>
-            <p id="resetDescription">
-                أدخل بريدك الإلكتروني لإرسال رمز التحقق.
-            </p>
+            <p id="resetDescription">أدخل بريدك الإلكتروني لإرسال رمز التحقق.</p>
 
             <div class="reset-step" id="resetEmailStep">
-                <div class="form-group">
+                <div class="modal-field">
                     <label for="resetEmail">البريد الإلكتروني</label>
                     <input id="resetEmail" type="email" placeholder="أدخل بريدك الإلكتروني">
                 </div>
-
-                <button type="button" class="submit-button" id="sendResetCodeButton">
-                    إرسال الرمز
-                </button>
+                <button type="button" class="submit-button" id="sendResetCodeButton">إرسال الرمز</button>
             </div>
 
             <div class="reset-step" id="resetCodeStep" hidden>
@@ -176,19 +234,17 @@
                     <input maxlength="1" inputmode="numeric">
                 </div>
 
-                <div class="form-group">
+                <div class="modal-field">
                     <label for="newPassword">كلمة المرور الجديدة</label>
                     <input id="newPassword" type="password" minlength="6" placeholder="6 أحرف على الأقل">
                 </div>
 
-                <div class="form-group">
+                <div class="modal-field">
                     <label for="newPasswordConfirm">تأكيد كلمة المرور الجديدة</label>
                     <input id="newPasswordConfirm" type="password" minlength="6" placeholder="أعد كتابة كلمة المرور">
                 </div>
 
-                <button type="button" class="submit-button" id="resetPasswordButton">
-                    تحديث كلمة المرور
-                </button>
+                <button type="button" class="submit-button" id="resetPasswordButton">تحديث كلمة المرور</button>
             </div>
 
             <div class="modal-message" id="resetMessage" hidden></div>
@@ -197,5 +253,4 @@
 
     <script src="../JS/login.js"></script>
 </body>
-
 </html>
