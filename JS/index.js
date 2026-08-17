@@ -25,3 +25,22 @@ async function loadMajorsCount() {
 }
 
 loadMajorsCount();
+
+document
+    .getElementById("startExamButton")
+    .addEventListener("click", function () {
+
+        const token =
+            localStorage.getItem("muwajeh_token");
+
+        if (!token) {
+
+            // Not logged in
+            window.location.href = "login.html";
+
+            return;
+        }
+
+        // Logged in
+        window.location.href = "test.html";
+    });
