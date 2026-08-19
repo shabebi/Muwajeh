@@ -753,3 +753,144 @@ body {
         max-width: 320px;
     }
 }
+
+
+.muwajeh-toast {
+    position: fixed;
+    left: 50%;
+    bottom: 30px;
+    transform: translate(-50%, 20px);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 20px;
+    background: #ffffff;
+    color: #222;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.14);
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+    z-index: 99999;
+    direction: rtl;
+}
+
+.muwajeh-toast.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+}
+
+.muwajeh-toast i {
+    font-size: 18px;
+}
+
+.muwajeh-toast.success i {
+    color: #22a06b;
+}
+
+.muwajeh-toast.error i {
+    color: #d64545;
+}
+
+.muwajeh-confirm-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    z-index: 100000;
+}
+
+.muwajeh-confirm-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.muwajeh-confirm-box {
+    width: min(420px, 100%);
+    padding: 28px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.18);
+    text-align: center;
+    transform: translateY(15px);
+    transition: transform 0.2s ease;
+}
+
+.muwajeh-confirm-overlay.show .muwajeh-confirm-box {
+    transform: translateY(0);
+}
+
+.muwajeh-confirm-icon {
+    width: 52px;
+    height: 52px;
+    margin: 0 auto 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #f4f6ff;
+    color: #3f51b5;
+    font-size: 21px;
+}
+
+.muwajeh-confirm-box h3 {
+    margin: 0 0 10px;
+    font-size: 20px;
+}
+
+.muwajeh-confirm-box p {
+    margin: 0;
+    color: #666;
+    line-height: 1.7;
+    font-size: 14px;
+}
+
+.muwajeh-confirm-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 24px;
+}
+
+.muwajeh-confirm-actions button {
+    flex: 1;
+    min-height: 44px;
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.muwajeh-confirm-cancel {
+    background: #f1f1f1;
+    color: #333;
+}
+
+.muwajeh-confirm-ok {
+    background: #222;
+    color: #fff;
+}
+
+@media (max-width: 600px) {
+    .muwajeh-toast {
+        width: calc(100% - 32px);
+        justify-content: center;
+        bottom: 20px;
+        text-align: center;
+    }
+
+    .muwajeh-confirm-box {
+        padding: 24px 20px;
+    }
+}

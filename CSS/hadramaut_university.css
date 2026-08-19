@@ -372,76 +372,53 @@ input {
 
 .search-section {
   width: min(1184px, calc(100% - 48px));
-
   margin: 0 auto;
-  padding-top: 4px;
-
+  padding-top: 42px;
   display: flex;
   flex-direction: column;
-
   align-items: center;
-
   gap: 8px;
 }
 
 .search-box {
   width: min(768px, 100%);
   height: 66px;
-
   padding: 8px;
-
   display: flex;
   align-items: center;
-
   gap: 8px;
-
-  /* Button on the left, input on the right */
   direction: ltr;
-
   background: rgba(255, 255, 255, 0.6);
-
   border: 1px solid var(--color-border);
-
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-
   border-radius: 50px;
-
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
 }
 
 .search-button {
   width: 48px;
   height: 48px;
-
   flex: 0 0 48px;
-
+  order: 1;
   border: 0;
   border-radius: 50%;
-
   background: var(--color-primary);
   color: var(--color-white);
-
   display: grid;
   place-items: center;
-
   cursor: pointer;
 }
 
 .search-input-wrapper {
   flex: 1;
-
+  order: 2;
   height: 40px;
-
   display: flex;
-  flex-direction: row-reverse;
-
+  flex-direction: row;
   align-items: center;
-
   gap: 10px;
-
   padding: 5px 8px;
-
   direction: rtl;
 }
 
@@ -1043,7 +1020,7 @@ input {
   display: flex;
 
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 
   gap: 20px;
 
@@ -1481,4 +1458,241 @@ input {
 .logout-button:hover {
   background: #c29447;
   color: #0a1d38;
+}
+
+
+/* =========================================================
+   DYNAMIC UNIVERSITY DATA / WISHLIST / SEARCH
+   ========================================================= */
+
+.section-heading-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.wishlist-count {
+  min-width: 28px;
+  height: 28px;
+  padding: 0 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(194, 148, 71, 0.12);
+  color: var(--color-secondary);
+  border: 1px solid rgba(194, 148, 71, 0.22);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.section-loading,
+.loading-state,
+.empty-state,
+.error-state {
+  width: 100%;
+  min-height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 24px;
+  color: var(--color-text-muted);
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+.error-state {
+  color: #a23b3b;
+  border-color: rgba(162, 59, 59, 0.2);
+}
+
+.empty-state {
+  flex-direction: column;
+  min-height: 130px;
+}
+
+.empty-state i {
+  color: var(--color-secondary);
+  font-size: 22px;
+}
+
+.loading-state {
+  min-height: 180px;
+}
+
+.loading-state i {
+  color: var(--color-secondary);
+}
+
+.faculty-section.is-hidden {
+  display: none;
+}
+
+.faculty-majors .major-card.is-hidden {
+  display: none;
+}
+
+.major-card {
+  position: relative;
+}
+
+.major-card[data-major-id] {
+  cursor: default;
+}
+
+.favorite-button {
+  position: relative;
+  z-index: 2;
+}
+
+.favorite-button.is-favorite {
+  color: var(--color-secondary);
+}
+
+.favorite-button.is-favorite i {
+  font-weight: 900;
+}
+
+.favorite-button.is-loading {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.favorite-button:focus-visible,
+.search-button:focus-visible,
+.search-input-wrapper input:focus-visible,
+.details-link:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 3px;
+}
+
+.major-faculty-name {
+  display: block;
+  width: 100%;
+  margin-top: -3px;
+  color: var(--color-text-muted);
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 600;
+}
+
+.major-card .details-link {
+  margin-top: auto;
+}
+
+.featured-card {
+  min-height: 220px;
+}
+
+.featured-card .major-faculty-name {
+  color: var(--color-text-muted);
+}
+
+.search-button {
+  transition: transform 180ms ease, background-color 180ms ease;
+}
+
+.search-button:hover {
+  transform: scale(1.03);
+}
+
+.search-button:active {
+  transform: scale(0.97);
+}
+
+@media (max-width: 800px) {
+  .section-heading {
+    align-items: center;
+  }
+
+  .section-heading h2 {
+    white-space: normal;
+  }
+}
+
+/* =========================================================
+   WISHLIST TOAST
+   ========================================================= */
+
+.wishlist-toast {
+    position: fixed;
+    left: 50%;
+    bottom: 30px;
+    transform: translate(-50%, 20px);
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 13px 20px;
+
+    background: #ffffff;
+    color: #222;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.14);
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease,
+        visibility 0.25s ease;
+
+    z-index: 99999;
+
+    direction: rtl;
+}
+
+.wishlist-toast.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+}
+
+.wishlist-toast i {
+    font-size: 18px;
+}
+
+.wishlist-toast.success i {
+    color: #22a06b;
+}
+
+.wishlist-toast.error i {
+    color: #d64545;
+}
+
+@media (max-width: 600px) {
+    .wishlist-toast {
+        width: calc(100% - 32px);
+        justify-content: center;
+        bottom: 20px;
+        text-align: center;
+    }
+}
+
+.search-section.is-searching .search-box {
+    border-color: var(--color-border) !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08) !important;
+}
+
+.search-input-wrapper input:focus,
+.search-input-wrapper input:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.search-box:focus,
+.search-box:focus-within {
+    outline: none !important;
 }

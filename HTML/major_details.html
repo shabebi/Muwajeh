@@ -4,29 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>الجامعات | موّجه</title>
+    <title>تفاصيل التخصص | موّجه</title>
     <link rel="icon" type="image/png" href="../LogoIcon.png">
-
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Tajawal:wght@400;500;600;700&display=swap"
         rel="stylesheet">
-
-    <!-- Font Awesome Free -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
-    <link rel="stylesheet" href="../CSS/universities.css">
+    <link rel="stylesheet" href="../CSS/major_details.css">
 </head>
 
 <body>
 
-    <!-- ================= HEADER ================= -->
-
     <header class="top-navigation">
-
         <a href="index.html" class="logo" aria-label="موّجه">
             <img src="../Logo.png" alt="موّجه">
         </a>
@@ -40,22 +31,16 @@
         </nav>
 
         <div class="auth-header-area">
-            <a href="login.html" class="login-button" id="loginButton">
-                تسجيل الدخول
-            </a>
+            <a href="login.html" class="login-button" id="loginButton">تسجيل الدخول</a>
 
-            <button type="button" class="profile-button" id="profileButton" hidden>
+            <button type="button" class="profile-button" id="profileButton" hidden aria-label="حسابي">
                 <i class="fa-solid fa-user"></i>
             </button>
         </div>
 
-        <!-- ACCOUNT POPUP -->
         <div class="account-overlay" id="accountOverlay" hidden>
             <div class="account-popup">
-
-                <button type="button" class="account-close" id="accountClose">
-                    ×
-                </button>
+                <button type="button" class="account-close" id="accountClose" aria-label="إغلاق">×</button>
 
                 <div class="account-avatar">
                     <i class="fa-solid fa-user"></i>
@@ -68,7 +53,6 @@
                         <span>الاسم</span>
                         <strong id="accountName">---</strong>
                     </div>
-
                     <div class="account-info-row">
                         <span>البريد الإلكتروني</span>
                         <strong id="accountEmail">---</strong>
@@ -79,128 +63,76 @@
                     <i class="fa-solid fa-right-from-bracket"></i>
                     تسجيل الخروج
                 </button>
-
             </div>
         </div>
-
     </header>
 
+    <main class="major-page">
 
-    <!-- ================= MAIN ================= -->
+        <div id="pageLoading" class="page-state">
+            <i class="fa-solid fa-spinner fa-spin"></i>
+            <span>جاري تحميل معلومات التخصص...</span>
+        </div>
 
-    <main class="main-content">
+        <div id="pageError" class="page-state error-state" hidden>
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <span id="pageErrorText">تعذر تحميل معلومات التخصص.</span>
+            <a href="javascript:history.back()">العودة</a>
+        </div>
 
-        <section class="page-content">
+        <div id="majorContent" hidden>
 
-            <!-- ================= PAGE TITLE ================= -->
+            <section class="major-hero">
+                <nav class="breadcrumb" aria-label="مسار الصفحة">
+                    <a href="universities.html">الجامعات</a>
+                    <i class="fa-solid fa-chevron-left"></i>
+                    <a id="universityBreadcrumb" href="#">جامعة</a>
+                    <i class="fa-solid fa-chevron-left"></i>
+                    <span id="facultyBreadcrumb">الكلية</span>
+                </nav>
 
-            <section class="page-title-banner">
-
-                <div class="page-badge">
-                    <i class="fa-solid fa-graduation-cap"></i>
-                    <span>دليل الجامعات الأكاديمية</span>
+                <div class="major-heading">
+                    <h1 id="majorName">---</h1>
                 </div>
-
-                <h1 class="page-title">
-                    الجامعات والمؤسسات الأكاديمية المتاحة
-                </h1>
-
-                <p class="page-description">
-                    تصفح الجامعات المعتمدة، واستكشف كلياتها، تخصصاتها، والخطة الدراسية والرسوم الخاصة بكل مجال.
-                </p>
-
             </section>
 
+            <nav class="detail-tabs" aria-label="أقسام التخصص">
+                <button class="detail-tab active" data-tab="overview">نبذة عن التخصص</button>
+                <button class="detail-tab" data-tab="courses">المواد الدراسية</button>
+                <button class="detail-tab" data-tab="admission">القبول والرسوم</button>
+            </nav>
 
-            <!-- ================= UNIVERSITIES GRID ================= -->
-
-            <section class="universities-grid" aria-label="الجامعات">
-
-                <!-- University Card -->
-
-                <article class="university-card">
-
-                    <div class="university-info">
-
-                        <h2 class="university-title">
-                            جامعة حضرموت
-                            <span>(Hadhramout University)</span>
-                        </h2>
-
-                        <div class="university-details">
-
-                            <div class="detail-row">
-                                <span class="detail-text">
-                                    الموقع: المكلا، محافظة حضرموت، اليمن
-                                </span>
-                                <i class="fa-solid fa-location-dot detail-icon"></i>
-                            </div>
-
-                            <div class="detail-row">
-                                <span class="detail-text">
-                                    تاريخ التأسيس: 1993م
-                                </span>
-                                <i class="fa-regular fa-calendar detail-icon"></i>
-                            </div>
-
-                            <div class="detail-row">
-                                <span class="detail-text">
-                                    عدد الكليات: 15 كلية أكاديمية
-                                </span>
-                                <i class="fa-solid fa-book-open detail-icon"></i>
-                            </div>
-
-                        </div>
-
-                        <p class="university-description">
-                            جامعة حكومية رائدة تقدم مجموعة واسعة من البرامج الأكاديمية المختلفة.
-                        </p>
-
-                        <a href="hadramaut_university.html" class="university-button">
-                            <i class="fa-solid fa-arrow-left"></i>
-                            <span>عرض الكليات والتخصصات</span>
-                        </a>
-
+            <section class="detail-panel active" id="overviewPanel">
+                <div class="overview-content">
+                    <h2>عن <span id="overviewName">التخصص</span></h2>
+                    <div class="overview-badge">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        <span id="duration">---</span> سنوات
                     </div>
 
-                    <div class="university-image">
-                        <img src="../University.jpg" alt="جامعة حضرموت">
-                    </div>
-
-                </article>
-
-
-                <!-- Coming Soon Card -->
-
-                <article class="coming-soon-card">
-
-                    <div class="coming-soon-icon">
-                        <i class="fa-solid fa-plus"></i>
-                    </div>
-
-                    <div class="coming-soon-content">
-
-                        <h2>
-                            جامعات أخرى قريباً
-                        </h2>
-
-                        <p>
-                            نعمل حالياً على إضافة وتفعيل المزيد من الجامعات والمؤسسات الأكاديمية لتغطية كافة المسارات.
-                        </p>
-
-                    </div>
-
-                    <div class="coming-soon-badge">
-                        <i class="fa-regular fa-hourglass-half"></i>
-                        <span>قيد التجهيز</span>
-                    </div>
-
-                </article>
-
+                    <p id="description">---</p>
+                </div>
             </section>
 
-        </section>
+            <section class="detail-panel" id="coursesPanel">
+                <div class="courses-content">
+                    <div id="yearTabs" class="year-tabs" aria-label="سنوات الدراسة"></div>
+                    <div id="coursesContainer" class="courses-container"></div>
+                </div>
+            </section>
 
+            <section class="detail-panel" id="admissionPanel">
+                <div class="admission-content">
+                    <div class="admission-heading">
+                        <h2>القبول والرسوم</h2>
+                    </div>
+
+                    <div id="admissionContainer" class="admission-grid"></div>
+                </div>
+            </section>
+
+        </div>
+    </main>
 
     <!-- ================= FOOTER ================= -->
 
@@ -321,7 +253,7 @@
 
     </footer>
 
-    </main>
+    <script src="../JS/major_details.js"></script>
     <script src="../JS/header-auth.js"></script>
 </body>
 

@@ -1011,3 +1011,53 @@ body {
   background: #c29447;
   color: #0a1d38;
 }
+
+.muwajeh-toast {
+    position: fixed;
+    left: 50%;
+    bottom: 30px;
+    transform: translate(-50%, 20px);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 20px;
+    background: #ffffff;
+    color: #222;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.14);
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+    z-index: 99999;
+    direction: rtl;
+}
+
+.muwajeh-toast.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+}
+
+.muwajeh-toast i {
+    font-size: 18px;
+}
+
+.muwajeh-toast.success i {
+    color: #22a06b;
+}
+
+.muwajeh-toast.error i {
+    color: #d64545;
+}
+
+@media (max-width: 600px) {
+    .muwajeh-toast {
+        width: calc(100% - 32px);
+        justify-content: center;
+        bottom: 20px;
+        text-align: center;
+    }
+}

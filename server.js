@@ -16,6 +16,8 @@ const facultiesRoutes = require("./routes/faculties");
 const majorsRoutes = require("./routes/majors");
 const questionsRoutes = require("./routes/questions");
 const assessmentsRoutes = require("./routes/assessments");
+const wishlistRoutes = require("./routes/wishlist");
+const majorDetailsRoutes = require("./routes/major-details");
 
 app.use("/api/auth", authRoutes);
 app.use("/api/universities", universitiesRoutes);
@@ -23,6 +25,8 @@ app.use("/api/faculties", facultiesRoutes);
 app.use("/api/majors", majorsRoutes);
 app.use("/api/questions", questionsRoutes);
 app.use("/api/assessments", assessmentsRoutes);
+app.use("/api/wishlist", wishlistRoutes);
+app.use("/api/major-details", majorDetailsRoutes);
 
 app.get("/api/test", (req, res) => {
     res.json({
